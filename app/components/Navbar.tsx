@@ -3,8 +3,10 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import "../globals.css";
+import { usePathname } from "next/navigation";
 
 const Navbar = () => {
+  const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [shouldRenderMenuItems, setShouldRenderMenuItems] = useState(false);
 
@@ -17,11 +19,11 @@ const Navbar = () => {
 
   const handleCloseMenu = () => {
     // Hide menu items first with an animation if necessary
-    setShouldRenderMenuItems(false);
+    setIsMenuOpen(false);
 
     // Wait for the transition to finish before hiding the menu completely
     setTimeout(() => {
-      setIsMenuOpen(false);
+      setShouldRenderMenuItems(false);
     }, 300); // Match this with your CSS transition time
   };
 
@@ -52,7 +54,7 @@ const Navbar = () => {
       <div className="flex items-center justify-between h-full max-w-screen-xl px-4 mx-auto xl:px-0">
         {/* Hamburger Icon */}
         <button
-          className={`hamburger ${isMenuOpen ? "open" : ""} md:hidden`}
+          className={`hamburger ${isMenuOpen ? "open" : ""} lg:hidden`}
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
           <span></span>
@@ -68,40 +70,38 @@ const Navbar = () => {
           } transition-transform duration-300 ease-in-out z-50 bg-white w-4/5 shadow-xl`}
         >
           {/* Close Button inside the menu panel */}
-          <div className="absolute top-4 right-4">
-            <button
-              className="close-button"
-              onClick={handleCloseMenu}
-              aria-label="Close menu"
+          <button
+            className="absolute top-4 right-4 close-button"
+            onClick={handleCloseMenu}
+            aria-label="Close menu"
+          >
+            {/* SVG for the close button */}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             >
-              {/* SVG for the close button */}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                width="24"
-                height="24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-          </div>
+              <path d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
 
           {/* Menu Items */}
-          <ul>
+          <ul className="ml-5 space-y-5 mt-14">
             {shouldRenderMenuItems &&
               navigation.map((item, index) => (
                 <li key={item.id} className="border-b border-gray-200">
                   <Link href={item.href} onClick={() => setIsMenuOpen(false)}>
                     <span
-                      className="block p-4 opacity-0"
+                      className="tracking-wider uppercase mobile-menu-item"
                       style={{
-                        animation: "slideFadeIn 0.2s ease forwards",
-                        animationDelay: `${index * 0.1 + 0.1}s`, // Start after the menu opens
+                        animation: "slideFadeIn 0.5s ease forwards",
+                        animationDelay: `${index * 0.1 + 0.2}s`, // Start after the menu opens
                       }}
                     >
                       {item.title}
@@ -123,7 +123,7 @@ const Navbar = () => {
         {/* Logo/Shop Name */}
         <Link
           href="/"
-          className="text-lg font-semibold tracking-wider text-gray-800 group sm:text-xl md:text-2xl lg:text-3xl"
+          className="text-xl font-semibold tracking-wider text-gray-800 group md:text-2xl lg:text-3xl"
         >
           <span className="inline-flex items-center justify-center font-bold uppercase">
             Nyla
@@ -138,7 +138,11 @@ const Navbar = () => {
         >
           {navigation.map((item) => (
             <Link key={item.id} href={item.href}>
-              <span className="nav-item">{item.title}</span>
+              <span
+                className={`nav-item ${pathname === item.href ? "active" : ""}`}
+              >
+                {item.title}
+              </span>
             </Link>
           ))}
         </div>

@@ -5,24 +5,30 @@
 /* hamburger menu links */
 @keyframes slideFadeIn {
   from {
-    transform: translateX(-5%);
+    transform: translateY(-70%);
     opacity: 0;
   }
   to {
-    transform: translateX(0%);
+    transform: translateY(0%);
     opacity: 1;
   }
 }
 
-/* close button for hamburger menu */
+/* Close button for the hamburger menu */
 .close-button {
-  position: absolute;
-  top: 0.5rem; /* Adjust the value as needed */
-  right: 0.5rem; /* Adjust the value as needed */
-  background: transparent;
+  background: none;
   border: none;
-  font-size: 1.5rem; /* Adjust the size as needed */
+  padding: 0;
   cursor: pointer;
+}
+
+/* Mobile menu links */
+.mobile-menu-item {
+  display: inline;
+  padding: 1.2rem; /* Increase padding to make the items bigger */
+  font-size: 1.3rem; /* Adjust font size as needed */
+  opacity: 0; /* Start as invisible */
+  transition: opacity 0.5s ease, transform 0.5s ease; /* Smooth transition for opacity and movement */
 }
 
 /* hamburger menu */
@@ -91,7 +97,15 @@
   position: relative;
   padding-bottom: 2px; /* Adjust the space for the underline */
   cursor: pointer;
-  transition: color 0.3s ease;
+  transition: color 0.3s ease, transform 0.3s ease; /* Add transform to the transition property */
+}
+
+.nav-item:hover {
+  color: #131313; /* Replace with your darker zinc color */
+}
+
+.nav-item.active {
+  color: #131313;
 }
 
 .nav-item::after {
@@ -101,15 +115,15 @@
   height: 2px; /* Adjust the thickness of the underline */
   bottom: 0;
   left: 0;
-  background-color: currentColor; /* Use the text color for the underline */
+  background-color: currentColor; /* Will use the text color, which changes on hover */
   transform: scaleX(0);
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease; /* Ensure this is only for the transform */
   transform-origin: bottom right;
 }
 
 .nav-item:hover::after {
   transform: scaleX(1);
-  transform-origin: bottom left;
+  transform-origin: bottom left; /* This will give the underline effect on hover */
 }
 
 /* Close button animation */
