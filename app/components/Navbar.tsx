@@ -4,12 +4,13 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import "../globals.css";
 import { usePathname } from "next/navigation";
-import { Heart, ShoppingBagIcon } from "lucide-react";
+import { Heart, ShoppingBagIcon, User, Instagram, Music2 } from "lucide-react";
 
 const Navbar = () => {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [shouldRenderMenuItems, setShouldRenderMenuItems] = useState(false);
+  const [isOverlayVisible, setIsOverlayVisible] = useState(false);
 
   const navigation = [
     { id: 1, title: "Home", href: "/" },
@@ -18,47 +19,62 @@ const Navbar = () => {
     // ... other navigation items if needed ...
   ];
 
+  const handleMenuToggle = () => {
+    setIsMenuOpen(!isMenuOpen);
+    // If the menu is being opened, show the overlay immediately
+    if (!isMenuOpen) {
+      setIsOverlayVisible(true);
+    } else {
+      // Begin the fade-out effect but keep the overlay visible until it's finished
+      setTimeout(() => setIsOverlayVisible(false), 1000);
+    }
+  };
+
   const handleCloseMenu = () => {
     // Hide menu items first with an animation if necessary
     setIsMenuOpen(false);
 
-    // Wait for the transition to finish before hiding the menu completely
+    // Start the fade-out effect for the overlay
+    setIsOverlayVisible(true);
     setTimeout(() => {
-      setShouldRenderMenuItems(false);
-    }, 300); // Match this with your CSS transition time
+      setIsOverlayVisible(false);
+    }, 1000); // You can adjust the duration as needed
   };
 
   useEffect(() => {
-    let timeoutId: number | undefined; // Declare the variable with type
+    let timeoutId: string | number | NodeJS.Timeout | undefined;
 
     if (isMenuOpen) {
-      // Render the menu items after a slight delay, which allows for any open animation
-      timeoutId = window.setTimeout(() => {
-        // Use window.setTimeout for clarity
-        setShouldRenderMenuItems(true);
-      }, 300); // Adjust this delay based on your menu opening animation time
+      // Immediately show the menu items when opening
+      setShouldRenderMenuItems(true);
+
+      // Show the overlay with a slight delay
+      timeoutId = setTimeout(() => {
+        setIsOverlayVisible(true);
+      }, 300);
     } else {
-      // Immediately begin closing animation
-      setShouldRenderMenuItems(false);
+      // Delay the hiding of menu items to match the CSS transition
+      timeoutId = setTimeout(() => {
+        setShouldRenderMenuItems(false);
+        setIsOverlayVisible(false); // Hide overlay after menu items are unrendered
+      }, 300); // Adjust this delay based on your menu closing animation time
     }
 
-    // Clean up the timeout when the component is unmounted or before the next effect runs
     return () => {
-      if (timeoutId !== undefined) {
+      if (timeoutId) {
         clearTimeout(timeoutId);
       }
     };
   }, [isMenuOpen]);
 
   return (
-    <div className="w-full h-20 border-b-[1px] border-b-zinc-500 bg-white text-zinc-600">
+    <div className="w-full h-20 text-zinc-600 ">
       <div className="flex items-center justify-between h-full max-w-screen-xl px-4 mx-auto xl:px-0">
         {/* Hamburger Icon */}
         <button
-          className={`hamburger ${isMenuOpen ? "open" : ""} lg:hidden`}
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          className={`hamburger ${isMenuOpen ? "open" : "closed"} lg:hidden`}
+          onClick={handleMenuToggle}
         >
-          <span></span>
           <span></span>
           <span></span>
           <span></span>
@@ -68,41 +84,22 @@ const Navbar = () => {
         <div
           className={`fixed inset-0 transform ${
             isMenuOpen ? "translate-x-0" : "-translate-x-full"
-          } transition-transform duration-300 ease-in-out z-50 bg-white w-4/5 shadow-xl`}
+          } transition-transform duration-300 ease-in-out z-40 bg-white w-full shadow-xl`}
+          style={{
+            top: "5rem" /* Height of the navbar */,
+            height: "calc(100vh - 5rem)" /* Full height minus navbar height */,
+          }}
         >
-          {/* Close Button inside the menu panel */}
-          <button
-            className="absolute top-4 right-4 close-button"
-            onClick={handleCloseMenu}
-            aria-label="Close menu"
-          >
-            {/* SVG for the close button */}
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              width="24"
-              height="24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-
           {/* Menu Items */}
           <ul className="ml-5 space-y-5 mt-14">
             {shouldRenderMenuItems &&
               navigation.map((item, index) => (
-                <li key={item.id} className="border-b border-gray-200">
+                <li key={item.id} className="font-medium text-zinc-900">
                   <Link href={item.href} onClick={() => setIsMenuOpen(false)}>
                     <span
                       className="tracking-wider uppercase mobile-menu-item"
                       style={{
-                        animation: "slideFadeIn 0.5s ease forwards",
-                        animationDelay: `${index * 0.1 + 0.2}s`, // Start after the menu opens
+                        animationDelay: `${index * 0.1}s`, // Start after the menu opens
                       }}
                     >
                       {item.title}
@@ -111,29 +108,72 @@ const Navbar = () => {
                 </li>
               ))}
           </ul>
+
+          <div className="absolute bottom-0 w-full p-4 border-t border-zinc-400/60">
+            {/* Container for icons */}
+            <div className="flex items-center justify-between text-zinc-900">
+              {/* Login Button for mobile */}
+              <Link
+                href={"/login"}
+                className="flex items-center"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <User className="flex justify-start w-6 h-6" />
+                <span className="ml-2 text-sm">Login</span>
+              </Link>
+
+              {/* Container for social media icons */}
+              <div>
+                <Link
+                  href={"https://www.instagram.com/"}
+                  target="_blank"
+                  className="inline-flex items-center mr-4"
+                >
+                  <Instagram className="w-6 h-6" />
+                </Link>
+                <Link
+                  href={"https://www.tiktok.com/"}
+                  target="_blank"
+                  className="inline-flex items-center"
+                >
+                  <Music2 className="w-6 h-6" />
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
 
-        {/* Overlay when mobile menu is open */}
-        {isMenuOpen && (
+        {/* Overlay when mobile menu is open or when it is closing */}
+        {isOverlayVisible && (
           <div
-            className="fixed inset-0 z-40 bg-black bg-opacity-50"
-            onClick={() => setIsMenuOpen(false)}
+            className={`fixed inset-0 z-30 transition-opacity ${
+              isOverlayVisible
+                ? "bg-opacity-50 backdrop-blur-sm"
+                : "bg-opacity-0"
+            }`}
+            style={{
+              top: "5rem",
+              height: "calc(100vh - 5rem)",
+              transition:
+                "opacity 1000ms ease-in, backdrop-filter 1000ms ease-out",
+            }}
+            onClick={handleCloseMenu}
           ></div>
         )}
 
         {/* Logo/Shop Name */}
         <Link
           href="/"
-          className="text-xl font-semibold tracking-wider text-gray-800 group md:text-2xl lg:text-3xl"
+          className="text-2xl font-bold tracking-wide text-gray-800 group sm:text-3xl md:text-3xl lg:text-3xl xl:text-3xl 2xl:text-3xl"
         >
-          <span className="inline-flex items-center justify-center font-bold uppercase">
+          <span className="inline-flex items-center justify-center uppercase">
             Nyla
           </span>
         </Link>
 
         {/* Desktop Navigation */}
         <div
-          className={`hidden md:flex items-center gap-5 text-sm font-semibold tracking-wider uppercase ${
+          className={`hidden md:flex items-center gap-5 text-md font-semibold tracking-wider uppercase ${
             isMenuOpen ? "hidden" : ""
           }`}
         >
@@ -147,29 +187,35 @@ const Navbar = () => {
             </Link>
           ))}
         </div>
+
         {/* Icons */}
         <div className="flex items-center gap-x-5">
           <Link
-            href={"/wishlist"}
+            href={"/my_wishlist"}
             className="relative duration-300 hover:text-zinc-900 group"
           >
-            <Heart className="w-7 h-7" />
+            <Heart className="w-6 h-6" />
             <span className="absolute top-0 flex items-center justify-center w-4 h-4 text-xs font-semibold rounded-full -left-1 bg-zinc-800 text-zinc-200 group-hover:bg-black">
               0
             </span>
           </Link>
           <Link
-            href={"/wishlist"}
+            href={"/my_cart"}
             className="relative duration-300 hover:text-black group"
           >
-            <ShoppingBagIcon className="w-7 h-7" />
+            <ShoppingBagIcon className="w-6 h-6" />
             <span className="absolute top-0 flex items-center justify-center w-4 h-4 text-xs font-semibold rounded-full -left-1 bg-zinc-800 text-zinc-200 group-hover:bg-black">
               0
             </span>
           </Link>
-          <button className="relative text-sm font-semibold tracking-wider uppercase duration-300 nav-item">
-            Login
-          </button>
+
+          {/* Login for desktop */}
+          <Link
+            href={"/login"}
+            className="relative hidden duration-300 hover:text-zinc-900 group md:flex"
+          >
+            <User className="w-6 h-6" />
+          </Link>
         </div>
       </div>
     </div>
