@@ -6,22 +6,18 @@
 
 /* hamburger menu links */
 @keyframes slideFadeIn {
-  from {
-    transform: translateY(-70%);
+  0% {
+    transform: translateY(-100%);
     opacity: 0;
   }
-  to {
-    transform: translateY(0%);
+  50% {
+    transform: translateY(-30px);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(0);
     opacity: 1;
   }
-}
-
-/* Close button for the hamburger menu */
-.close-button {
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
 }
 
 /* Mobile menu links */
@@ -31,6 +27,7 @@
   font-size: 1.3rem; /* Adjust font size as needed */
   opacity: 0; /* Start as invisible */
   transition: opacity 0.5s ease, transform 0.5s ease; /* Smooth transition for opacity and movement */
+  animation: slideFadeIn 0.5s ease forwards;
 }
 
 /* hamburger menu */
@@ -38,7 +35,7 @@
   cursor: pointer;
   display: block;
   width: 20px;
-  height: 18px; /* Height of the hamburger icon */
+  height: 25px; /* Height of the hamburger icon */
   position: relative;
   transform: rotate(0deg);
   transition: 0.5s ease-in-out;
@@ -46,52 +43,91 @@
   background: transparent;
 }
 
+/* Common styles for the hamburger lines */
 .hamburger span {
   display: block;
   position: absolute;
-  height: 2px; /* Height of each line */
+  height: 2px;
   width: 100%;
-  background: #000; /* Color of the hamburger lines */
+  background: #000;
   border-radius: 2px;
   opacity: 1;
-  left: 0;
-  transform: rotate(0deg);
-  transition: 0.25s ease-in-out;
+  transition: transform 0.25s ease-in-out, opacity 0.25s; /* Keep opacity transition duration short for a quick fade out */
+  transform-origin: 50% 50%; /* Rotate around the center */
 }
 
+/* Position the lines */
 .hamburger span:nth-child(1) {
-  top: 2px;
+  top: 6px;
 }
 
-.hamburger span:nth-child(2),
+.hamburger span:nth-child(2) {
+  top: 12px;
+}
+
 .hamburger span:nth-child(3) {
-  top: 8px;
+  top: 18px;
 }
 
-.hamburger span:nth-child(4) {
-  top: 14px;
+/* Keyframes for the middle line to swoosh out and in */
+@keyframes swooshOut {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(10px); /* Slight move to the right */
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-100%); /* Swoosh to the left */
+    opacity: 0;
+  }
+}
+
+@keyframes swooshIn {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  50% {
+    transform: translateX(-30px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Transform top and bottom lines into 'X' with a delay */
+.hamburger.open span:nth-child(1),
+.hamburger.open span:nth-child(3) {
+  transition: transform 0.5s ease-in-out 0.5s; /* Delay by the duration of the middle line's animation */
 }
 
 .hamburger.open span:nth-child(1) {
-  top: 8px;
-  width: 0%;
-  left: 50%;
+  transform: translateY(6px) rotate(45deg);
 }
 
 .hamburger.open span:nth-child(2) {
-  transform: rotate(45deg);
-  top: 8px; /* Centralize for 'X' animation */
+  animation: swooshOut 0.7s forwards;
 }
 
 .hamburger.open span:nth-child(3) {
-  transform: rotate(-45deg);
-  top: 8px; /* Centralize for 'X' animation */
+  transform: translateY(-6px) rotate(-45deg);
 }
 
-.hamburger.open span:nth-child(4) {
-  top: 18px;
-  width: 0%;
-  left: 50%;
+/* Revert 'X' transformation on closing */
+.hamburger.closed span:nth-child(1),
+.hamburger.closed span:nth-child(3) {
+  transition: transform 0.5s ease-in-out; /* Immediate transition */
+  transform: translateY(0) rotate(0deg);
+}
+
+/* Revert middle line swoosh on closing */
+.hamburger.closed span:nth-child(2) {
+  animation: swooshIn 0.7s forwards;
 }
 
 /* desktop nav items */
@@ -128,14 +164,3 @@
   transform-origin: bottom left; /* This will give the underline effect on hover */
 }
 
-/* Close button animation */
-@keyframes fadeInScaleUp {
-  0% {
-    opacity: 0;
-    transform: scale(0.8);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
