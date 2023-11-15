@@ -68,7 +68,7 @@ const Navbar = () => {
   }, [isMenuOpen]);
 
   return (
-    <div className="w-full h-20 text-zinc-600 ">
+    <div className="w-full h-20 text-zinc-600 font-custom">
       <div className="flex items-center justify-between h-full max-w-screen-xl px-4 mx-auto xl:px-0">
         {/* Hamburger Icon */}
         <button
