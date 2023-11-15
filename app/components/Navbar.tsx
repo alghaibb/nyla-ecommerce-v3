@@ -19,6 +19,21 @@ const Navbar = () => {
     // ... other navigation items if needed ...
   ];
 
+  // Disable scroll when in mobile menu
+  useEffect(() => {
+    // Apply or remove the 'overflow-hidden' class from the body
+    if (isMenuOpen) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+
+    // Clean up function to remove class when component unmounts
+    return () => {
+      document.body.classList.remove("overflow-hidden");
+    };
+  }, [isMenuOpen]);
+
   const handleMenuToggle = () => {
     setIsMenuOpen(!isMenuOpen);
     // If the menu is being opened, show the overlay immediately
