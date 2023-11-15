@@ -112,7 +112,7 @@ const Navbar = () => {
                 <li key={item.id} className="font-medium text-zinc-900">
                   <Link href={item.href} onClick={() => setIsMenuOpen(false)}>
                     <span
-                      className="tracking-wider uppercase mobile-menu-item"
+                      className="tracking-widest uppercase mobile-menu-item"
                       style={{
                         animationDelay: `${index * 0.1}s`, // Start after the menu opens
                       }}
@@ -179,7 +179,7 @@ const Navbar = () => {
         {/* Logo/Shop Name */}
         <Link
           href="/"
-          className="text-2xl font-bold tracking-wide text-gray-800 group sm:text-3xl md:text-3xl lg:text-3xl xl:text-3xl 2xl:text-3xl"
+          className="text-2xl font-bold tracking-widest text-gray-800 group sm:text-3xl md:text-3xl lg:text-3xl xl:text-3xl 2xl:text-3xl"
         >
           <span className="inline-flex items-center justify-center uppercase">
             Nyla
@@ -188,7 +188,7 @@ const Navbar = () => {
 
         {/* Desktop Navigation */}
         <div
-          className={`hidden md:flex items-center gap-5 text-md font-semibold tracking-wider uppercase ${
+          className={`hidden md:flex items-center gap-5 text-md font-semibold tracking-widest uppercase ${
             isMenuOpen ? "hidden" : ""
           }`}
         >
