@@ -32,7 +32,7 @@ const HeroBanner = () => {
 
   return (
     <div>
-      <div className="overflow-hidden">
+      <div className="overflow-hidden font-custom">
         <Slider {...settings}>
           {slideData.map((item) => (
             <Slide key={item.id} img={item.img} />
