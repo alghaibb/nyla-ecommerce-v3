@@ -58,11 +58,11 @@ const LatestAdditions = async () => {
               </div>
             ))}
           </div>
-          <button className="my-10 tracking-wider button">
-            <Link href="/latest-additions">
+          <Link href="/products/all">
+            <button className="my-10 tracking-wider button">
               <span className="text-sm">View All Products</span>
-            </Link>
-          </button>
+            </button>
+          </Link>
         </div>
       </div>
     </div>

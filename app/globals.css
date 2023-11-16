@@ -206,3 +206,20 @@
   background-color: white;
   transition: background-color 0.5s ease, color 0.5s ease; /* Slower and smoother transition for background-color and color */
 }
+
+/* OVERLAY EFFECTS */
+.backdrop-blur {
+  transition: opacity 1000ms ease, backdrop-filter 1000ms ease;
+}
+
+.backdrop-blur-visible {
+  opacity: 1;
+  backdrop-filter: blur(5px); /* Adjust the blur as needed */
+  transition: opacity 1000ms ease-in-out, backdrop-filter 1000ms ease-out;
+}
+
+.backdrop-blur-hidden {
+  opacity: 0;
+  backdrop-filter: blur(0px);
+  transition: opacity 1000ms ease-in-out, backdrop-filter 1000ms ease-out;
+}
