@@ -1,34 +1,32 @@
 import React from "react";
 import { client } from "../lib/client";
 import { simplifiedProduct } from "../interface";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 
-async function getData() {
-  const query = `*[_type == "product"][0...4] | order(_createdAt desc) {
+async function getData(category: string) {
+  const query = `*[_type == "product" && category->name == "${category}"] {
     _id,
-    price,
-    name,
-    "slug": slug.current,
-    "categoryName": category->name,
-    "imageUrl": image[0].asset->url
-  }
-  `;
+      "imageUrl": image[0].asset->url,
+      price,
+      name,
+      "slug": slug.current,
+      "categoryName": category->name
+  }`;
 
   const data = await client.fetch(query);
 
   return data;
 }
 
-const LatestAdditions = async () => {
-  const data: simplifiedProduct[] = await getData();
-
+const CategoryPage = async ({ params }: { params: { category: string } }) => {
+  const data: simplifiedProduct[] = await getData(params.category);
   return (
     <div className="bg-zinc-100 font-custom">
-      <div className="max-w-2xl px-4 py-16 mx-auto sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+      <div className="max-w-2xl px-4 mx-auto sm:px-6 lg:max-w-7xl lg:px-8">
         <div className="flex flex-col items-center justify-center">
           <h2 className="mb-6 text-2xl font-semibold tracking-wider text-center uppercase text-zinc-900">
-            Latest Additions
+            Products for {params.category}
           </h2>
           <div className="grid grid-cols-1 mt-6 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
             {data.map((product) => (
@@ -58,15 +56,10 @@ const LatestAdditions = async () => {
               </div>
             ))}
           </div>
-          <button className="my-10 tracking-wider button">
-            <Link href="/latest-additions">
-              <span className="text-sm">View All Products</span>
-            </Link>
-          </button>
         </div>
       </div>
     </div>
   );
 };
 
-export default LatestAdditions;
+export default CategoryPage;
