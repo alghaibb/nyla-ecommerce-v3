@@ -66,13 +66,13 @@ const Navbar = () => {
       // Show the overlay with a slight delay
       timeoutId = setTimeout(() => {
         setIsOverlayVisible(true);
-      }, 300);
+      }, 1000);
     } else {
       // Delay the hiding of menu items to match the CSS transition
       timeoutId = setTimeout(() => {
         setShouldRenderMenuItems(false);
         setIsOverlayVisible(false); // Hide overlay after menu items are unrendered
-      }, 300); // Adjust this delay based on your menu closing animation time
+      }, 1000); // Adjust this delay based on your menu closing animation time
     }
 
     return () => {
@@ -161,10 +161,10 @@ const Navbar = () => {
         {/* Overlay when mobile menu is open or when it is closing */}
         {isOverlayVisible && (
           <div
-            className={`fixed inset-0 z-30 transition-opacity ${
+            className={`fixed inset-0 z-30 backdrop-blur ${
               isOverlayVisible
-                ? "bg-opacity-50 backdrop-blur-sm"
-                : "bg-opacity-0"
+                ? "backdrop-blur-visible"
+                : "backdrop-blur-hidden"
             }`}
             style={{
               top: "5rem",

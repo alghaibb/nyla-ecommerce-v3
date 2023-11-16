@@ -54,7 +54,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ params }) => {
   };
 
   if (!data) {
-    return <div>Loading...</div>;
+    return null;
   }
 
   return (
@@ -82,49 +82,52 @@ const ProductPage: React.FC<ProductPageProps> = ({ params }) => {
             {/* All Buttons Container */}
             <div className="flex flex-col gap-4">
               {/* Quantity Selector */}
-              <p className="text-zinc-500">Quantity:</p>
-              <div className="flex items-center justify-start mb-4">
-                <div className="flex items-center px-4 py-1 border border-zinc-400/50">
-                  <button
-                    onClick={handleDecrease}
-                    className="px-2 py-1 font-medium text-zinc-600 bg-zinc-200"
-                  >
-                    −
-                  </button>
-                  <input
-                    type="text"
-                    className="w-12 font-medium text-center border-none outline-none text-md text-zinc-600 focus:ring-0"
-                    value={quantity}
-                    onChange={handleInputChange}
-                    min="1"
-                  />
-                  <button
-                    onClick={handleIncrease}
-                    className="px-2 py-1 font-medium text-zinc-600 bg-zinc-200"
-                  >
-                    +
-                  </button>
+              <div className="flex flex-col gap-1">
+                <p className="text-zinc-500">Quantity:</p>
+                <div className="flex items-center justify-start mb-4">
+                  <div className="flex items-center px-4 py-1 border border-zinc-400/50">
+                    <button
+                      onClick={handleDecrease}
+                      className="px-2 py-1 font-medium text-zinc-600"
+                    >
+                      −
+                    </button>
+                    <input
+                      type="text"
+                      className="w-12 font-medium text-center border-none outline-none text-md text-zinc-600 focus:ring-0"
+                      value={quantity}
+                      onChange={handleInputChange}
+                      min="1"
+                    />
+                    <button
+                      onClick={handleIncrease}
+                      className="px-2 py-1 font-medium text-zinc-600"
+                    >
+                      +
+                    </button>
+                  </div>
                 </div>
               </div>
 
               {/* Add to Cart & Add to Wishlist Button Container */}
-              <div className="flex flex-col gap-4 w-96">
-                {/* Add to Cart & Add to Wishlist Button */}
-                <button className="button">
-                  <Link href="/cart">
+              <div className="flex flex-col gap-4">
+                {/* Add to Cart Button */}
+                <Link href="/cart">
+                  <button className="button w-96">
                     <span className="text-sm tracking-widest uppercase">
                       add to cart
                     </span>
-                  </Link>
-                </button>
+                  </button>
+                </Link>
 
-                <button className="button">
-                  <Link href="/wishlist">
+                {/* Add to Wishlist Button */}
+                <Link href="/my-wishlist">
+                  <button className="button w-96">
                     <span className="text-sm tracking-widest uppercase">
                       add to wishlist
                     </span>
-                  </Link>
-                </button>
+                  </button>
+                </Link>
               </div>
 
               <p className="mt-6 text-base tracking-wide text-zinc-900">
