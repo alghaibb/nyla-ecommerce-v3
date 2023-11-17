@@ -5,12 +5,14 @@ import Link from "next/link";
 import "../globals.css";
 import { usePathname } from "next/navigation";
 import { Heart, ShoppingBagIcon, User, Instagram, Music2 } from "lucide-react";
+import Modal from "./WishlistModal";
 
 const Navbar = () => {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [shouldRenderMenuItems, setShouldRenderMenuItems] = useState(false);
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
+  const [isWishlistModalOpen, setIsWishlistModalOpen] = useState(false);
 
   const navigation = [
     { id: 1, title: "Home", href: "/" },
@@ -81,6 +83,11 @@ const Navbar = () => {
       }
     };
   }, [isMenuOpen]);
+
+  // Wishlist modal
+  const toggleWishlistModal = () => {
+    setIsWishlistModalOpen(!isWishlistModalOpen);
+  };
 
   return (
     <div className="w-full h-20 text-zinc-600 font-custom">
@@ -203,17 +210,28 @@ const Navbar = () => {
           ))}
         </div>
 
-        {/* Icons */}
+        {/* Icons Container */}
         <div className="flex items-center gap-x-5">
-          <Link
-            href={"/wishlist"}
+          {/* Wishlist Icon/Button */}
+          <button
+            onClick={toggleWishlistModal}
             className="relative duration-300 hover:text-zinc-900 group"
           >
             <Heart className="w-6 h-6" />
             <span className="absolute top-0 flex items-center justify-center w-4 h-4 text-xs font-semibold rounded-full -left-1 bg-zinc-800 text-zinc-200 group-hover:bg-black">
               0
             </span>
-          </Link>
+          </button>
+
+          {/* Wishlist Modal */}
+          <Modal
+            isOpen={isWishlistModalOpen}
+            onClose={toggleWishlistModal}
+          >
+            
+          </Modal>
+
+          {/* Cart Icon */}
           <Link
             href={"/cart"}
             className="relative duration-300 hover:text-black group"

@@ -9,11 +9,11 @@ import Link from "next/link";
 async function getData() {
   const query = `*[_type == "product"] {
     _id,
-    "imageUrl": image[0].asset->url,
-    price,
-    name,
-    "slug": slug.current,
-    "categoryName": category->name
+      "imageUrl": image[0].asset->url,
+      price,
+      name,
+      "slug": slug.current,
+      "categoryName": category->name
   }`;
 
   const data = await client.fetch(query);
@@ -37,7 +37,7 @@ const AllProductsPage = () => {
     <div className="bg-zinc-100 font-custom">
       <div className="max-w-2xl px-4 py-16 mx-auto sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
         <h2 className="mb-6 text-2xl font-semibold tracking-wider text-center uppercase text-zinc-900">
-          All Products
+          all products
         </h2>
         <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
           {data.map((product) => (
@@ -46,9 +46,11 @@ const AllProductsPage = () => {
                 <Image
                   src={product.imageUrl}
                   alt="Product image"
-                  className="object-cover object-center w-full h-full lg:w-full lg:h-full"
+                  layout="responsive"
                   width={300}
                   height={300}
+                  objectFit="cover"
+                  className="object-cover object-center w-full h-full"
                 />
               </div>
 
