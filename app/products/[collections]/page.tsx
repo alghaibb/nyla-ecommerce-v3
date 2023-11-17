@@ -1,9 +1,8 @@
 "use client";
 
-// pages/all-products.tsx
 import React from "react";
-import { client } from "../../lib/client"; // Adjust the import path as needed
-import { simplifiedProduct } from "../../interface"; // Adjust the import path as needed
+import { client } from "../../lib/client";
+import { simplifiedProduct } from "../../interface";
 import Image from "next/image";
 import Link from "next/link";
 
