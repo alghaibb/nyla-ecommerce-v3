@@ -206,7 +206,7 @@ const Navbar = () => {
         {/* Icons */}
         <div className="flex items-center gap-x-5">
           <Link
-            href={"/my_wishlist"}
+            href={"/wishlist"}
             className="relative duration-300 hover:text-zinc-900 group"
           >
             <Heart className="w-6 h-6" />
@@ -215,7 +215,7 @@ const Navbar = () => {
             </span>
           </Link>
           <Link
-            href={"/my_cart"}
+            href={"/cart"}
             className="relative duration-300 hover:text-black group"
           >
             <ShoppingBagIcon className="w-6 h-6" />

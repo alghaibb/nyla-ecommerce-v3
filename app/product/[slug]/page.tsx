@@ -121,7 +121,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ params }) => {
                 </Link>
 
                 {/* Add to Wishlist Button */}
-                <Link href="/my-wishlist">
+                <Link href="/wishlist">
                   <button className="button w-96">
                     <span className="text-sm tracking-widest uppercase">
                       add to wishlist
