@@ -223,3 +223,109 @@
   backdrop-filter: blur(0px);
   transition: opacity 1000ms ease-in-out, backdrop-filter 1000ms ease-out;
 }
+
+/* WISHLIST MODAL */
+
+/* Common styles for both mobile and larger screens */
+.modal-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+}
+
+.modal-title {
+  font-size: 1.5em;
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(5px);
+  z-index: 1000;
+}
+
+.modal-content {
+  height: 60vh;
+  max-width: 80rem;
+  padding: 20px;
+  background: white;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+}
+
+.modal-close-button {
+  background: none;
+  border: none;
+  font-size: 2em;
+  cursor: pointer;
+}
+
+.modal-body {
+  margin-top: 1.5rem;
+}
+
+/* MEDIA QUERIES FOR WISHLIST MODAL */
+
+/* Styles for small screens (e.g., mobile phones) */
+@media screen and (max-width: 375px) {
+  .modal-content {
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    flex-direction: column; /* Stack content vertically */
+    align-items: center; /* Center align content */
+  }
+
+  /* Adjust text styles for small screens */
+  .modal-body {
+    font-size: 14px; /* Adjust font size */
+    line-height: 1.4; /* Adjust line height */
+  }
+}
+
+/* Styles for medium screens (e.g., larger mobile phones) */
+@media screen and (min-width: 376px) and (max-width: 640px) {
+  .modal-content {
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+  }
+
+  /* Adjust text styles for medium screens */
+  .modal-body {
+    font-size: 16px; /* Adjust font size */
+    line-height: 1.5; /* Adjust line height */
+  }
+}
+
+/* Styles for tablets and larger screens (e.g., iPads) */
+@media screen and (min-width: 641px) and (max-width: 1024px) {
+  .modal-content {
+    width: 80%; /* 80% width */
+    height: auto; /* Auto height (content-dependent) */
+  }
+
+  /* Adjust text styles for medium screens */
+  .modal-body {
+    font-size: 18px; /* Adjust font size */
+    line-height: 1.6; /* Adjust line height */
+  }
+}
+
+/* Styles for larger screens (e.g., laptops and desktops) */
+@media screen and (min-width: 1025px) {
+  .modal-content {
+    width: 80%; /* 80% width */
+    height: auto; /* Auto height (content-dependent) */
+  }
+}
