@@ -41,7 +41,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
         <div className="modal-header-border" />
         {/* Modal body */}
         <div className="modal-body flex flex-col items-center justify-start h-[80vh]">
-          <h3 className="mb-4 text-sm font-semibold tracking-wider md:text-lg">
+          <h3 className="text-sm font-semibold tracking-wider md:text-lg">
             Adore something? Place it on My Wishlist!
           </h3>
           <p className="px-4 mt-5 text-sm leading-6 tracking-wider text-zinc-500 max-w-[100%] md:max-w-[60%] lg:max-w-[60%]">

@@ -227,9 +227,7 @@ const Navbar = () => {
           <Modal
             isOpen={isWishlistModalOpen}
             onClose={toggleWishlistModal}
-          >
-            
-          </Modal>
+          ></Modal>
 
           {/* Cart Icon */}
           <Link
