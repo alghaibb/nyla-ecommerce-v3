@@ -9,10 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@heroicons/react": "^2.0.18",
     "@material-tailwind/react": "^2.1.4",
+    "@radix-ui/react-dialog": "^1.0.5",
     "@reduxjs/toolkit": "^1.9.7",
     "@sanity/image-url": "^1.0.2",
     "@stripe/stripe-js": "^2.1.11",
+    "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "keen-slider": "^6.8.6",
     "lucide-react": "^0.292.0",
@@ -30,7 +33,9 @@
     "slick-carousel": "^1.8.1",
     "stripe": "^14.4.0",
     "swiper": "^11.0.4",
-    "tailwind-merge": "^2.0.0"
+    "tailwind-merge": "^2.0.0",
+    "tailwindcss-animate": "^1.0.7",
+    "use-shopping-cart": "^3.1.8"
   },
   "devDependencies": {
     "@types/node": "^20",

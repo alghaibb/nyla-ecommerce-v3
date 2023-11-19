@@ -1,6 +1,8 @@
 "use client";
 
+import AddToBag from "@/app/components/AddToBag";
 import ImageGallery from "@/app/components/ImageGallery";
+import QuantitySelector from "@/app/components/QuantitySelector";
 import { fullProduct } from "@/app/interface";
 import { client } from "@/app/lib/client";
 import Link from "next/link";
@@ -36,21 +38,9 @@ const ProductPage: React.FC<ProductPageProps> = ({ params }) => {
     });
   }, [params.slug]);
 
-  const handleIncrease = () => {
-    setQuantity((prevQuantity) => prevQuantity + 1);
-  };
-
-  const handleDecrease = () => {
-    setQuantity((prevQuantity) =>
-      prevQuantity > 1 ? prevQuantity - 1 : prevQuantity
-    );
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newQuantity = parseInt(e.target.value, 10);
-    if (!isNaN(newQuantity) && newQuantity > 0) {
-      setQuantity(newQuantity);
-    }
+  const handleQuantityChange = (newQuantity: number) => {
+    setQuantity(newQuantity);
+    // Additional logic if needed, such as updating a shopping cart state
   };
 
   if (!data) {
@@ -82,43 +72,22 @@ const ProductPage: React.FC<ProductPageProps> = ({ params }) => {
             {/* All Buttons Container */}
             <div className="flex flex-col gap-4">
               {/* Quantity Selector */}
-              <div className="flex flex-col gap-1">
-                <p className="text-zinc-500">Quantity:</p>
-                <div className="flex items-center justify-start mb-4">
-                  <div className="flex items-center px-4 py-1 border border-zinc-400/50">
-                    <button
-                      onClick={handleDecrease}
-                      className="px-2 py-1 font-medium text-zinc-600"
-                    >
-                      −
-                    </button>
-                    <input
-                      type="text"
-                      className="w-12 font-medium text-center border-none outline-none text-md text-zinc-600 focus:ring-0"
-                      value={quantity}
-                      onChange={handleInputChange}
-                      min="1"
-                    />
-                    <button
-                      onClick={handleIncrease}
-                      className="px-2 py-1 font-medium text-zinc-600"
-                    >
-                      +
-                    </button>
-                  </div>
-                </div>
-              </div>
+              <QuantitySelector
+                initialQuantity={quantity}
+                onQuantityChange={handleQuantityChange}
+              />
 
               {/* Add to Cart & Add to Wishlist Button Container */}
               <div className="flex flex-col gap-4">
                 {/* Add to Cart Button */}
-                <Link href="/cart">
-                  <button className="button w-96">
-                    <span className="text-sm tracking-widest uppercase">
-                      add to cart
-                    </span>
-                  </button>
-                </Link>
+                <AddToBag
+                  currency="AUD"
+                  description={data.details}
+                  image={data.image[0]}
+                  name={data.name}
+                  price={data.price}
+                  key={data._id}
+                />
 
                 {/* Add to Wishlist Button */}
                 <Link href="/wishlist">

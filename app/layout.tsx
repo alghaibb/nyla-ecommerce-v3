@@ -4,7 +4,8 @@ import "./globals.css";
 import Navbar from "./components/Navbar";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Toaster } from "react-hot-toast";
+import CartProvider from "./components/Providers";
+import ShoppingCartModal from "./components/ShoppingCartModal";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,9 +22,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Toaster />
-        <Navbar />
-        {children}
+        <CartProvider>
+          <Navbar />
+          <ShoppingCartModal />
+          {children}
+        </CartProvider>
       </body>
     </html>
   );

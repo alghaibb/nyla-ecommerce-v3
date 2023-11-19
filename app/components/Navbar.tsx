@@ -6,6 +6,7 @@ import "../globals.css";
 import { usePathname } from "next/navigation";
 import { Heart, ShoppingBagIcon, User, Instagram, Music2 } from "lucide-react";
 import Modal from "./WishlistModal";
+import { useShoppingCart } from "use-shopping-cart";
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -13,6 +14,7 @@ const Navbar = () => {
   const [shouldRenderMenuItems, setShouldRenderMenuItems] = useState(false);
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
   const [isWishlistModalOpen, setIsWishlistModalOpen] = useState(false);
+  const { handleCartClick } = useShoppingCart();
 
   const navigation = [
     { id: 1, title: "Home", href: "/" },
@@ -230,15 +232,15 @@ const Navbar = () => {
           ></Modal>
 
           {/* Cart Icon */}
-          <Link
-            href={"/cart"}
+          <button
             className="relative duration-300 hover:text-black group"
+            onClick={() => handleCartClick()}
           >
             <ShoppingBagIcon className="w-6 h-6" />
             <span className="absolute top-0 flex items-center justify-center w-4 h-4 text-xs font-semibold rounded-full -left-1 bg-zinc-800 text-zinc-200 group-hover:bg-black">
               0
             </span>
-          </Link>
+          </button>
 
           {/* Login for desktop */}
           <Link
