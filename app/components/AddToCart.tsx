@@ -1,8 +1,7 @@
 "use client";
 
-import React from "react";
-import { useShoppingCart } from "use-shopping-cart";
 import "../globals.css";
+import { useShoppingCart } from "use-shopping-cart";
 import { urlFor } from "../lib/client";
 
 export interface ProductCart {
@@ -12,6 +11,7 @@ export interface ProductCart {
   currency: string;
   image: any;
   quantity: number;
+  slug: string;
 }
 
 const AddToCart = ({
@@ -20,29 +20,40 @@ const AddToCart = ({
   price,
   currency,
   image,
-  quantity = 1,
+  quantity,
+  slug,
 }: ProductCart) => {
-  const { addItem, handleCartClick, totalPrice } = useShoppingCart();
+  const { addItem, handleCartClick, cartDetails, setItemQuantity } =
+    useShoppingCart();
 
-  const product = {
-    name: name,
-    description: description,
-    price: price,
-    currency: currency,
-    image: urlFor(image).url(),
-    id: "adsadas",
-    quantity: quantity,
+  const handleAddToCart = () => {
+    const product = {
+      name,
+      description,
+      price,
+      currency,
+      image: urlFor(image).url(),
+      id: slug,
+      quantity,
+    };
+
+    // Check if the item is already in the cart
+    if (cartDetails && cartDetails[slug]) {
+      // Update the quantity of the existing item
+      setItemQuantity(
+        slug,
+        cartDetails && cartDetails[slug].quantity + quantity
+      );
+    } else {
+      // Add the new item to the cart
+      addItem(product);
+    }
+
+    handleCartClick();
   };
 
-  const displayTotalPrice = totalPrice ?? 0;
-
   return (
-    <button
-      className="button w-96"
-      onClick={() => {
-        addItem(product), handleCartClick();
-      }}
-    >
+    <button className="button w-96" onClick={handleAddToCart}>
       <span className="text-sm tracking-widest uppercase">add to cart</span>
     </button>
   );

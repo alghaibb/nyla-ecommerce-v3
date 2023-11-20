@@ -81,6 +81,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ params }) => {
               <div className="flex flex-col gap-4">
                 {/* Add to Cart Button */}
                 <AddToCart
+                  slug={data.slug}
                   currency="AUD"
                   description={data.details}
                   image={data.image[0]}
