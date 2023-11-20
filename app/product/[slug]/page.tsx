@@ -1,6 +1,6 @@
 "use client";
 
-import AddToBag from "@/app/components/AddToBag";
+import AddToCart from "@/app/components/AddToCart";
 import ImageGallery from "@/app/components/ImageGallery";
 import QuantitySelector from "@/app/components/QuantitySelector";
 import { fullProduct } from "@/app/interface";
@@ -55,7 +55,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ params }) => {
 
           <div className="md:py-8">
             <div className="mb-2 md:mb-3">
-              <h2 className="text-xl font-medium tracking-wide uppercase text-zinc-800">
+              <h2 className="text-xl font-bold tracking-wide uppercase text-zinc-800">
                 {data.name}
               </h2>
             </div>
@@ -63,7 +63,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ params }) => {
             <div className="mb-4">
               <div className="flex items-end gap-2">
                 {/* Price for product */}
-                <span className="text-xl font-medium tracking-wider text-zinc-500">
+                <span className="text-xl font-semibold tracking-wider text-zinc-800">
                   ${data.price}
                 </span>
               </div>
@@ -80,13 +80,14 @@ const ProductPage: React.FC<ProductPageProps> = ({ params }) => {
               {/* Add to Cart & Add to Wishlist Button Container */}
               <div className="flex flex-col gap-4">
                 {/* Add to Cart Button */}
-                <AddToBag
+                <AddToCart
                   currency="AUD"
                   description={data.details}
                   image={data.image[0]}
                   name={data.name}
                   price={data.price}
                   key={data._id}
+                  quantity={quantity}
                 />
 
                 {/* Add to Wishlist Button */}

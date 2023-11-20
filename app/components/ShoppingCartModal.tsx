@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Sheet,
   SheetContent,
@@ -10,6 +10,13 @@ import {
 import { useShoppingCart } from "use-shopping-cart";
 import Image from "next/image";
 import QuantitySelector from "./QuantitySelector";
+import "../globals.css";
+import Spinner from "./LoadingSpinner";
+
+// Define the type for loading states
+type LoadingStates = {
+  [key: string]: boolean;
+};
 
 const ShoppingCartModal = () => {
   const {
@@ -18,19 +25,41 @@ const ShoppingCartModal = () => {
     handleCartClick,
     cartDetails,
     removeItem,
+    totalPrice,
+    setItemQuantity,
   } = useShoppingCart();
-  const [quantity, setQuantity] = useState(1);
 
-  const handleQuantityChange = (newQuantity: number) => {
-    setQuantity(newQuantity);
-    // Additional logic if needed, such as updating a shopping cart state
+  const [loadingStates, setLoadingStates] = useState<LoadingStates>({});
+
+  const isLoading = Object.values(loadingStates).some((state) => state);
+
+  const handleQuantityChange = (newQuantity: number, itemId: string) => {
+    setLoadingStates((prevStates) => ({ ...prevStates, [itemId]: true }));
+
+    // Replace this with your actual asynchronous operation
+    setItemQuantity(itemId, newQuantity);
+
+    setTimeout(() => {
+      setLoadingStates((prevStates) => ({ ...prevStates, [itemId]: false }));
+    }, 2000);
   };
+
+  const [lastKnownTotal, setLastKnownTotal] = useState(totalPrice);
+
+  useEffect(() => {
+    // Update last known total only when loading is finished
+    if (!isLoading) {
+      setLastKnownTotal(totalPrice);
+    }
+  }, [isLoading, totalPrice]);
 
   if (!cartCount) {
     return (
       <Sheet open={shouldDisplayCart} onOpenChange={handleCartClick}>
         <SheetContent className="bg-zinc-200 sm:max-w-lg w-full md:w-[90vw] text-zinc-900">
-          <SheetHeader></SheetHeader>
+          <SheetHeader className="font-bold tracking-wider uppercase">
+            Your Cart
+          </SheetHeader>
           <div className="flex flex-col items-center justify-center h-full">
             <h1 className="text-lg font-bold text-center uppercase">
               Your cart is empty
@@ -45,12 +74,16 @@ const ShoppingCartModal = () => {
     <Sheet open={shouldDisplayCart} onOpenChange={() => handleCartClick()}>
       <SheetContent className="bg-zinc-100 sm:max-w-lg w-[90vw]">
         <SheetHeader>
-          <SheetTitle className="tracking-wider uppercase">
+          <SheetTitle className="font-bold tracking-wider uppercase">
             Your Cart
           </SheetTitle>
         </SheetHeader>
-        <div className="flex flex-col justify-between h-full">
-          <div className="flex-1 mt-8 overflow-y-auto">
+        <div
+          className={`flex flex-col justify-between h-full ${
+            isLoading ? "overflow-hidden" : "overflow-auto"
+          }`}
+        >
+          <div className="flex-1 mt-8">
             <ul className="-my-6 divide-y divide-zinc-400">
               {Object.values(cartDetails ?? {}).map((entry) => (
                 <li key={entry.id} className="flex items-start py-6">
@@ -63,18 +96,26 @@ const ShoppingCartModal = () => {
                     />
                   </div>
                   <div className="flex flex-col flex-1 ml-4">
-                    <div className="flex items-start justify-between w-full">
-                      <h3 className="text-sm font-semibold text-zinc-900">
+                    <div className="flex flex-col justify-between w-full">
+                      <h3 className="text-base font-semibold text-zinc-900">
                         {entry.name}
                       </h3>
-                      <button onClick={() => removeItem(entry.id)}>
+                      <p className="mt-1 text-sm text-zinc-500 line-clamp-3">
+                        {entry.description}
+                      </p>
+
+                      <button
+                        onClick={() => removeItem(entry.id)}
+                        className="self-end"
+                      >
+                        {/* Remove from cart button */}
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
                           viewBox="0 0 24 24"
                           stroke-width="1.5"
                           stroke="currentColor"
-                          className="w-5 h-5 duration-300 ease-in-out cursor-pointer text-zinc-400 hover:text-zinc-800"
+                          className="w-5 h-5 my-3 duration-300 ease-in-out cursor-pointer text-zinc-400 hover:text-zinc-800"
                         >
                           <path
                             stroke-linecap="round"
@@ -86,17 +127,33 @@ const ShoppingCartModal = () => {
                     </div>
                     <div className="flex items-center justify-between w-full my-2">
                       <QuantitySelector
-                        initialQuantity={quantity}
-                        onQuantityChange={handleQuantityChange}
+                        initialQuantity={entry.quantity}
+                        onQuantityChange={(newQuantity) =>
+                          handleQuantityChange(newQuantity, entry.id)
+                        }
                       />
-                      <p className="text-base font-semibold text-zinc-900">
-                        ${entry.price}
-                      </p>
+                      <div>
+                        {loadingStates[entry.id] ? (
+                          <Spinner /> // Show spinner when loading
+                        ) : (
+                          <p className="text-base font-bold text-zinc-900">
+                            ${entry.price * entry.quantity}
+                          </p>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </li>
               ))}
             </ul>
+          </div>
+          <div className="flex justify-between px-4 py-2">
+            <p className="text-lg font-bold tracking-wider uppercase md:text-xl">
+              Total:
+            </p>
+            <p className="text-lg font-bold tracking-wider md:text-xl">
+              ${lastKnownTotal?.toFixed()}
+            </p>
           </div>
         </div>
       </SheetContent>

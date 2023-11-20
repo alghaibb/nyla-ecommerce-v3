@@ -11,16 +11,18 @@ export interface ProductCart {
   price: number;
   currency: string;
   image: any;
+  quantity: number;
 }
 
-const AddToBag = ({
+const AddToCart = ({
   name,
   description,
   price,
   currency,
   image,
+  quantity = 1,
 }: ProductCart) => {
-  const { addItem, handleCartClick } = useShoppingCart();
+  const { addItem, handleCartClick, totalPrice } = useShoppingCart();
 
   const product = {
     name: name,
@@ -29,13 +31,21 @@ const AddToBag = ({
     currency: currency,
     image: urlFor(image).url(),
     id: "adsadas",
+    quantity: quantity,
   };
 
+  const displayTotalPrice = totalPrice ?? 0;
+
   return (
-    <button className="button w-96" onClick={() => addItem(product)}>
+    <button
+      className="button w-96"
+      onClick={() => {
+        addItem(product), handleCartClick();
+      }}
+    >
       <span className="text-sm tracking-widest uppercase">add to cart</span>
     </button>
   );
 };
 
-export default AddToBag;
+export default AddToCart;
