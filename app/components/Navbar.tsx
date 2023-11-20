@@ -14,7 +14,7 @@ const Navbar = () => {
   const [shouldRenderMenuItems, setShouldRenderMenuItems] = useState(false);
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
   const [isWishlistModalOpen, setIsWishlistModalOpen] = useState(false);
-  const { handleCartClick } = useShoppingCart();
+  const { handleCartClick, cartCount } = useShoppingCart();
 
   const navigation = [
     { id: 1, title: "Home", href: "/" },
@@ -226,10 +226,9 @@ const Navbar = () => {
           </button>
 
           {/* Wishlist Modal */}
-          <Modal
-            isOpen={isWishlistModalOpen}
-            onClose={toggleWishlistModal}
-          ></Modal>
+          <Modal isOpen={isWishlistModalOpen} onClose={toggleWishlistModal}>
+            <React.Fragment />
+          </Modal>
 
           {/* Cart Icon */}
           <button
@@ -238,7 +237,7 @@ const Navbar = () => {
           >
             <ShoppingBagIcon className="w-6 h-6" />
             <span className="absolute top-0 flex items-center justify-center w-4 h-4 text-xs font-semibold rounded-full -left-1 bg-zinc-800 text-zinc-200 group-hover:bg-black">
-              0
+              {cartCount}
             </span>
           </button>
 
