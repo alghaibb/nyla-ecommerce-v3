@@ -106,9 +106,9 @@ const Navbar = () => {
 
         {/* Hamburger Menu for Mobile */}
         <div
-          className={`fixed inset-0 transform ${
-            isMenuOpen ? "translate-x-0" : "-translate-x-full"
-          } transition-transform duration-300 ease-in-out z-40 bg-white w-full shadow-xl`}
+          className={`fixed inset-0 z-40 bg-white shadow-xl ${
+            isMenuOpen ? "mobile-menu-open" : "mobile-menu-closed"
+          } mobile-menu`}
           style={{
             top: "5rem" /* Height of the navbar */,
             height: "calc(100vh - 5rem)" /* Full height minus navbar height */,
