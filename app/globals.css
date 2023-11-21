@@ -29,14 +29,37 @@
   }
 }
 
+/* MOBILE MENU CONTAINER */
+.mobile-menu {
+  transition: transform 0.5s ease-in-out; /* Smooth transition for sliding in and out */
+}
+
+/* State when menu is open */
+.mobile-menu-open {
+  transform: translateX(0); /* Slide in from the left */
+}
+
+/* State when menu is closed */
+.mobile-menu-closed {
+  transform: translateX(-100%); /* Start off-screen to the left */
+}
+
 /* MOBILE MENU LINKS */
 .mobile-menu-item {
   display: inline;
   padding: 1.2rem; /* Increase padding to make the items bigger */
   font-size: 1.3rem; /* Adjust font size as needed */
   opacity: 0; /* Start as invisible */
-  transition: opacity 0.5s ease, transform 0.5s ease; /* Smooth transition for opacity and movement */
-  animation: slideFadeIn 0.5s ease forwards;
+  transform: translateX(-50px); /* Start slightly off to the left */
+  animation: slideInFromLeft 1s ease forwards; /* Custom animation for sliding in */
+  animation-delay: var(--slide-delay, 0s); /* Use a CSS variable for delay */
+}
+
+@keyframes slideInFromLeft {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 /* HAMBURGER MENU */
@@ -209,19 +232,19 @@
 
 /* OVERLAY EFFECTS */
 .backdrop-blur {
-  transition: opacity 1000ms ease, backdrop-filter 1000ms ease;
+  transition: opacity 0.5s ease, backdrop-filter 0.5s ease;
 }
 
 .backdrop-blur-visible {
   opacity: 1;
-  backdrop-filter: blur(5px); /* Adjust the blur as needed */
-  transition: opacity 1000ms ease-in-out, backdrop-filter 1000ms ease-out;
+  backdrop-filter: blur(5px);
+  transition: opacity 0.5s ease-in-out, backdrop-filter 0.5s ease-out;
 }
 
 .backdrop-blur-hidden {
   opacity: 0;
   backdrop-filter: blur(0px);
-  transition: opacity 1000ms ease-in-out, backdrop-filter 1000ms ease-out;
+  transition: opacity 0.5s ease-in-out, backdrop-filter 0.5s ease-out;
 }
 
 /* WISHLIST MODAL */
