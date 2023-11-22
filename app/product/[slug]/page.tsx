@@ -5,7 +5,6 @@ import ImageGallery from "@/app/components/ImageGallery";
 import QuantitySelector from "@/app/components/QuantitySelector";
 import { fullProduct } from "@/app/interface";
 import { client } from "@/app/lib/client";
-import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
 async function getData(slug: string): Promise<fullProduct> {
@@ -40,12 +39,13 @@ const ProductPage: React.FC<ProductPageProps> = ({ params }) => {
 
   const handleQuantityChange = (newQuantity: number) => {
     setQuantity(newQuantity);
-    // Additional logic if needed, such as updating a shopping cart state
   };
 
   if (!data) {
     return null;
   }
+
+  const handleAddToWishlist = () => {};
 
   return (
     <div>
@@ -92,13 +92,11 @@ const ProductPage: React.FC<ProductPageProps> = ({ params }) => {
                 />
 
                 {/* Add to Wishlist Button */}
-                <Link href="/wishlist">
-                  <button className="button w-96">
-                    <span className="text-sm tracking-widest uppercase">
-                      add to wishlist
-                    </span>
-                  </button>
-                </Link>
+                <button className="button w-96" onClick={handleAddToWishlist}>
+                  <span className="text-sm tracking-widest uppercase">
+                    add to wishlist
+                  </span>
+                </button>
               </div>
 
               <p className="mt-6 text-base tracking-wide text-zinc-900">
