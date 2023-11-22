@@ -1,19 +1,31 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import Modal from "./WishlistModal";
 import Link from "next/link";
 import "../globals.css";
+import React, { useEffect, useState } from "react";
+
 import { usePathname } from "next/navigation";
-import { Heart, ShoppingBagIcon, User, Instagram, Music2 } from "lucide-react";
-import Modal from "./WishlistModal";
+import {
+  Heart,
+  ShoppingBagIcon,
+  User,
+  Instagram,
+  Music2,
+  LogOut,
+} from "lucide-react";
 import { useShoppingCart } from "use-shopping-cart";
+import { useSession, signOut } from "next-auth/react";
 
 const Navbar = () => {
   const pathname = usePathname();
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [shouldRenderMenuItems, setShouldRenderMenuItems] = useState(false);
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
   const [isWishlistModalOpen, setIsWishlistModalOpen] = useState(false);
+
+  const { data: session } = useSession();
   const { handleCartClick, cartCount } = useShoppingCart();
 
   const navigation = [
@@ -86,9 +98,12 @@ const Navbar = () => {
     };
   }, [isMenuOpen]);
 
-  // Wishlist modal
   const toggleWishlistModal = () => {
     setIsWishlistModalOpen(!isWishlistModalOpen);
+  };
+
+  const handleSignOut = async () => {
+    await signOut({ redirect: true, callbackUrl: "/sign-in" });
   };
 
   return (
@@ -136,15 +151,24 @@ const Navbar = () => {
           <div className="absolute bottom-0 w-full p-4 border-t border-zinc-400/60">
             {/* Container for icons */}
             <div className="flex items-center justify-between text-zinc-900">
-              {/* Login Button for mobile */}
-              <Link
-                href={"/login"}
-                className="flex items-center"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                <User className="flex justify-start w-6 h-6" />
-                <span className="ml-2 text-sm">Login</span>
-              </Link>
+              {/* Login/Logout Buttons for mobile */}
+              {!session && (
+                <Link
+                  href={"/sign-in"}
+                  className="flex items-center"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <User className="flex justify-start w-6 h-6" />
+                  <span className="ml-2 text-sm">Login</span>
+                </Link>
+              )}
+
+              {session && (
+                <button onClick={handleSignOut} className="flex items-center">
+                  <LogOut className="flex justify-start w-6 h-6" />
+                  <span className="ml-2 text-sm">Logout</span>
+                </button>
+              )}
 
               {/* Container for social media icons */}
               <div>
@@ -215,20 +239,24 @@ const Navbar = () => {
         {/* Icons Container */}
         <div className="flex items-center gap-x-5">
           {/* Wishlist Icon/Button */}
-          <button
-            onClick={toggleWishlistModal}
-            className="relative duration-300 hover:text-zinc-900 group"
-          >
-            <Heart className="w-6 h-6" />
-            <span className="absolute top-0 flex items-center justify-center w-4 h-4 text-xs font-semibold rounded-full -left-1 bg-zinc-800 text-zinc-200 group-hover:bg-black">
-              0
-            </span>
-          </button>
+          {session && (
+            <button
+              onClick={toggleWishlistModal}
+              className="relative duration-300 hover:text-zinc-900 group"
+            >
+              <Heart className="w-6 h-6" />
+              <span className="absolute top-0 flex items-center justify-center w-4 h-4 text-xs font-semibold rounded-full -left-1 bg-zinc-800 text-zinc-200 group-hover:bg-black">
+                0
+              </span>
+            </button>
+          )}
 
           {/* Wishlist Modal */}
-          <Modal isOpen={isWishlistModalOpen} onClose={toggleWishlistModal}>
-            <React.Fragment />
-          </Modal>
+          {session && isWishlistModalOpen && (
+            <Modal isOpen={isWishlistModalOpen} onClose={toggleWishlistModal}>
+              <React.Fragment />
+            </Modal>
+          )}
 
           {/* Cart Icon */}
           <button
@@ -242,12 +270,24 @@ const Navbar = () => {
           </button>
 
           {/* Login for desktop */}
-          <Link
-            href={"/login"}
-            className="relative hidden duration-300 hover:text-zinc-900 group md:flex"
-          >
-            <User className="w-6 h-6" />
-          </Link>
+          {!session && (
+            <Link
+              href={"/sign-in"}
+              className="relative hidden duration-300 hover:text-zinc-900 group md:flex"
+            >
+              <User className="w-6 h-6" />
+            </Link>
+          )}
+
+          {/* Logout Icon/Button - Only shown if the user is logged in */}
+          {session && (
+            <button
+              onClick={handleSignOut}
+              className="relative duration-300 hover:text-zinc-900 group"
+            >
+              <LogOut className="w-6 h-6" />
+            </button>
+          )}
         </div>
       </div>
     </div>

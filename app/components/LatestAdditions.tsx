@@ -59,7 +59,7 @@ const LatestAdditions = async () => {
             ))}
           </div>
           <Link href="/products/all">
-            <button className="my-10 tracking-wider button">
+            <button className="mt-10 tracking-wider button">
               <span className="text-sm">view all products</span>
             </button>
           </Link>
