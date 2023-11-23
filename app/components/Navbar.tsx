@@ -1,6 +1,6 @@
 "use client";
 
-import Modal from "./WishlistModal";
+import WishlistModal from "./WishlistModal";
 import Link from "next/link";
 import "../globals.css";
 import React, { useEffect, useState } from "react";
@@ -24,6 +24,7 @@ const Navbar = () => {
   const [shouldRenderMenuItems, setShouldRenderMenuItems] = useState(false);
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
   const [isWishlistModalOpen, setIsWishlistModalOpen] = useState(false);
+  const [wishlistCount, setWishlistCount] = useState(0);
 
   const { data: session } = useSession();
   const { handleCartClick, cartCount } = useShoppingCart();
@@ -105,6 +106,32 @@ const Navbar = () => {
   const handleSignOut = async () => {
     await signOut({ redirect: true, callbackUrl: "/sign-in" });
   };
+
+  // Function to update the wishlist count
+  const updateWishlistCount = () => {
+    const storedWishlist = localStorage.getItem("wishlist");
+    if (storedWishlist) {
+      const wishlistItems = JSON.parse(storedWishlist);
+      setWishlistCount(wishlistItems.length);
+    } else {
+      setWishlistCount(0);
+    }
+  };
+
+  // Effect to update the wishlist count on mount and whenever the wishlist changes
+  useEffect(() => {
+    // Optional: Set up an event listener for localStorage changes
+    // This is useful if the wishlist can be updated in multiple tabs
+    window.addEventListener("wishlistUpdated", updateWishlistCount);
+
+    // Initial update of the wishlist count
+    updateWishlistCount();
+
+    // Cleanup the event listener
+    return () => {
+      window.removeEventListener("wishlistUpdated", updateWishlistCount);
+    };
+  }, []);
 
   return (
     <div className="w-full h-20 text-zinc-600 font-custom">
@@ -246,16 +273,19 @@ const Navbar = () => {
             >
               <Heart className="w-6 h-6" />
               <span className="absolute top-0 flex items-center justify-center w-4 h-4 text-xs font-semibold rounded-full -left-1 bg-zinc-800 text-zinc-200 group-hover:bg-black">
-                0
+                {wishlistCount}
               </span>
             </button>
           )}
 
           {/* Wishlist Modal */}
           {session && isWishlistModalOpen && (
-            <Modal isOpen={isWishlistModalOpen} onClose={toggleWishlistModal}>
+            <WishlistModal
+              isOpen={isWishlistModalOpen}
+              onClose={toggleWishlistModal}
+            >
               <React.Fragment />
-            </Modal>
+            </WishlistModal>
           )}
 
           {/* Cart Icon */}
