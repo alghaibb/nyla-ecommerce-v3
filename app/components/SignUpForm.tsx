@@ -13,7 +13,6 @@ import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "../../components/ui/input";
 import Link from "next/link";
-import GoogleSignInButton from "./GoogleSignInButton";
 import { useRouter } from "next/navigation";
 
 const FormSchema = z
@@ -148,15 +147,7 @@ const SignUpForm = () => {
             <button className="w-full mt-5 button" type="submit">
               Sign up
             </button>
-            <div className="flex items-center justify-center my-5">
-              <div className="flex-grow h-px bg-zinc-400/60"></div>
-              <span className="px-4 text-sm font-semibold tracking-wider uppercase text-zinc-600">
-                or
-              </span>
-              <div className="flex-grow h-px bg-zinc-400/60"></div>
-            </div>
-            <GoogleSignInButton>Sign up with Google</GoogleSignInButton>
-            <p className="mt-4 text-sm text-center text-zinc-600">
+            <p className="mt-5 text-sm text-center text-zinc-600">
               Have an account? &nbsp;
               <Link className="text-zinc-500 hover:underline" href="/sign-in">
                 Sign in
