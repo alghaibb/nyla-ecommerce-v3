@@ -13,7 +13,6 @@ import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "../../components/ui/input";
 import Link from "next/link";
-import GoogleSignInButton from "./GoogleSignInButton";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
@@ -96,11 +95,7 @@ const SignInForm = () => {
               Sign in
             </button>
           </form>
-          <div className="flex items-center w-full mx-auto my-4 justify-evenly before:mr-4 before:block before:h-px before:flex-grow before:bg-stone-400 after:ml-4 after:block after:h-px after:flex-grow after:bg-stone-400">
-            or
-          </div>
-          <GoogleSignInButton>Sign in with Google</GoogleSignInButton>
-          <p className="mt-4 text-sm text-center text-gray-600">
+          <p className="mt-5 text-sm text-center text-gray-600">
             If you don&apos;t have an account, &nbsp;
             <Link
               className="text-zinc-500 hover:underline"
