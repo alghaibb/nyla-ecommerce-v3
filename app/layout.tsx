@@ -7,6 +7,7 @@ import ShoppingCartModal from "./components/ShoppingCartModal";
 import { Inter } from "next/font/google";
 import type { Metadata } from "next";
 import Provider from "./components/SessionProvider";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,6 +26,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <Provider>
           <CartProvider>
+            <Toaster />
             <Navbar />
             <ShoppingCartModal />
             {children}

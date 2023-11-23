@@ -1,6 +1,7 @@
 "use client";
 
 import AddToCart from "@/app/components/AddToCart";
+import AddToWishlist from "@/app/components/AddToWishlist";
 import ImageGallery from "@/app/components/ImageGallery";
 import QuantitySelector from "@/app/components/QuantitySelector";
 import { fullProduct } from "@/app/interface";
@@ -92,11 +93,14 @@ const ProductPage: React.FC<ProductPageProps> = ({ params }) => {
                 />
 
                 {/* Add to Wishlist Button */}
-                <button className="button w-96" onClick={handleAddToWishlist}>
-                  <span className="text-sm tracking-widest uppercase">
-                    add to wishlist
-                  </span>
-                </button>
+                <AddToWishlist
+                  name={data.name}
+                  description={data.details}
+                  image={data.image[0]}
+                  price={data.price}
+                  key={data._id}
+                  slug={data.slug}
+                />
               </div>
 
               <p className="mt-6 text-base tracking-wide text-zinc-900">
