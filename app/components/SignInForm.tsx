@@ -97,10 +97,7 @@ const SignInForm = () => {
           </form>
           <p className="mt-5 text-sm text-center text-gray-600">
             If you don&apos;t have an account, &nbsp;
-            <Link
-              className="text-zinc-500 hover:underline"
-              href="/account/signup"
-            >
+            <Link className="text-zinc-500 hover:underline" href="/sign-up">
               Sign up
             </Link>
           </p>

@@ -6,6 +6,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { urlFor } from "../lib/client";
 
 export interface WishlistProduct {
+  quantity: number;
   name: string;
   slug: string;
   image: any;
