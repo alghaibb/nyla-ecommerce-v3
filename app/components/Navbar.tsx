@@ -1,6 +1,5 @@
 "use client";
 
-import WishlistModal from "./WishlistModal";
 import Link from "next/link";
 import "../globals.css";
 import React, { useEffect, useState } from "react";
@@ -267,25 +266,17 @@ const Navbar = () => {
         <div className="flex items-center gap-x-5">
           {/* Wishlist Icon/Button */}
           {session && (
-            <button
-              onClick={toggleWishlistModal}
-              className="relative duration-300 hover:text-zinc-900 group"
-            >
-              <Heart className="w-6 h-6" />
-              <span className="absolute top-0 flex items-center justify-center w-4 h-4 text-xs font-semibold rounded-full -left-1 bg-zinc-800 text-zinc-200 group-hover:bg-black">
-                {wishlistCount}
-              </span>
-            </button>
-          )}
-
-          {/* Wishlist Modal */}
-          {session && isWishlistModalOpen && (
-            <WishlistModal
-              isOpen={isWishlistModalOpen}
-              onClose={toggleWishlistModal}
-            >
-              <React.Fragment />
-            </WishlistModal>
+            <Link href="/my-wishlist">
+              <button
+                onClick={toggleWishlistModal}
+                className="relative duration-300 hover:text-zinc-900 group"
+              >
+                <Heart className="w-6 h-6" />
+                <span className="absolute top-0 flex items-center justify-center w-4 h-4 text-xs font-semibold rounded-full -left-1 bg-zinc-800 text-zinc-200 group-hover:bg-black">
+                  {wishlistCount}
+                </span>
+              </button>
+            </Link>
           )}
 
           {/* Cart Icon */}

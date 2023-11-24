@@ -295,136 +295,6 @@
   transition: opacity 0.5s ease-in-out, backdrop-filter 0.5s ease-out;
 }
 
-/* WISHLIST MODAL */
-
-/* Common styles for both mobile and larger screens */
-
-.modal-header {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 20px;
-}
-
-.modal-title {
-  font-size: 1.5em;
-}
-
-.modal-backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  backdrop-filter: blur(5px);
-  z-index: 1000;
-}
-
-.modal-content {
-  height: 60vh;
-  max-width: 80rem;
-  padding: 20px;
-  background: white;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-}
-
-.modal-close-button {
-  background: none;
-  border: none;
-  font-size: 2em;
-  cursor: pointer;
-}
-
-.modal-body {
-  margin-top: 1.5rem;
-  align-items: center;
-  padding: 20px;
-}
-
-.wishlist-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 10px;
-  border-bottom: 2px solid #1f1d1d;
-}
-
-.wishlist-item:not(:last-child) {
-  border-bottom: 1px solid #cac6c6;
-}
-
-.wishlist-item h4 {
-  margin: 0 0 5px;
-  font-size: 1rem;
-}
-
-.wishlist-item p {
-  margin: 0;
-}
-
-/* MEDIA QUERIES FOR WISHLIST MODAL */
-
-/* Styles for small screens (e.g., mobile phones) */
-@media screen and (max-width: 375px) {
-  .modal-content {
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    flex-direction: column; /* Stack content vertically */
-    align-items: center; /* Center align content */
-  }
-
-  /* Adjust text styles for small screens */
-  .modal-body {
-    font-size: 14px; /* Adjust font size */
-    line-height: 1.4; /* Adjust line height */
-  }
-}
-
-/* Styles for medium screens (e.g., larger mobile phones) */
-@media screen and (min-width: 376px) and (max-width: 640px) {
-  .modal-content {
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-  }
-
-  /* Adjust text styles for medium screens */
-  .modal-body {
-    font-size: 16px; /* Adjust font size */
-    line-height: 1.5; /* Adjust line height */
-  }
-}
-
-/* Styles for tablets and larger screens (e.g., iPads) */
-@media screen and (min-width: 641px) and (max-width: 1024px) {
-  .modal-content {
-    width: 80%; /* 80% width */
-    height: auto; /* Auto height (content-dependent) */
-  }
-
-  /* Adjust text styles for medium screens */
-  .modal-body {
-    font-size: 18px; /* Adjust font size */
-    line-height: 1.6; /* Adjust line height */
-  }
-}
-
-/* Styles for larger screens (e.g., laptops and desktops) */
-@media screen and (min-width: 1025px) {
-  .modal-content {
-    width: 80%; /* 80% width */
-    height: auto; /* Auto height (content-dependent) */
-  }
-}
-
 /* LOADING SPINNER */
 
 .spinner {
@@ -445,9 +315,63 @@
   }
 }
 
-.custom-toast {
-  background-color: var(--zinc-800);
-  color: var(--zinc-100);
-  border-radius: 8px;
-  padding: 10px;
+/* MEDIA QUERIES FOR IMAGES */
+
+/* Smaller screens */
+@media (max-width: 320px) {
+  .mobile-view {
+    flex-direction: column;
+  }
+
+  /* remove button for wishlist */
+  .mobile-remove-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
+
+@media (max-width: 375px) {
+  .mobile-view {
+    flex-direction: column;
+  }
+
+  .mobile-remove-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
+
+@media (max-width: 425px) {
+  .mobile-view {
+    flex-direction: column;
+  }
+
+  .mobile-remove-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
+
+@media (max-width: 540px) {
+  .mobile-view {
+    flex-direction: column;
+  }
+
+  .mobile-remove-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
+
+/* remove button for wishlist */
+li:not(:first-child) .mobile-remove-btn {
+  padding-top: 1.5rem;
+}
+
+.darker-border {
+  border-bottom: 2px solid #131313;
 }
