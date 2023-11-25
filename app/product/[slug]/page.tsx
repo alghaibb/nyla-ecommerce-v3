@@ -4,11 +4,11 @@ import AddToCart from "@/app/components/AddToCart";
 import AddToWishlist from "@/app/components/AddToWishlist";
 import ImageGallery from "@/app/components/ImageGallery";
 import QuantitySelector from "@/app/components/QuantitySelector";
+import "../../globals.css";
 import Link from "next/link";
 import { fullProduct } from "@/app/interface";
 import { client } from "@/app/lib/client";
 import React, { useEffect, useState } from "react";
-import "../../globals.css";
 
 async function getData(slug: string): Promise<fullProduct> {
   const query = `*[_type == "product" && slug.current == "${slug}"][0] {
@@ -43,6 +43,23 @@ const ProductPage: React.FC<ProductPageProps> = ({ params }) => {
     setQuantity(newQuantity);
   };
 
+  const getBackLinkInfo = () => {
+    if (data) {
+      switch (data.categoryName.toLowerCase()) {
+        case "hijabs":
+          return { link: "/hijabs", text: "View Our Hijabs" };
+        case "abayas":
+          return { link: "/abayas", text: "View Our Abayas" };
+        default:
+          return { link: "/collections/all", text: "Back To Collections" };
+      }
+    }
+
+    return { link: "/collections/all", text: "Back To Collections" };
+  };
+
+  const backLinkInfo = getBackLinkInfo();
+
   if (!data) {
     return null;
   }
@@ -52,7 +69,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ params }) => {
       <div className="max-w-screen-xl px-4 mx-auto mt-10 md:px-8">
         {/* Back Arrow */}
         <div className="mx-2 my-4 md:hidden">
-          <Link href="/collections/all">
+          <Link href={backLinkInfo.link}>
             <span className="inline-flex items-center cursor-pointer">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -70,7 +87,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ params }) => {
                 <path d="M2 12H22" />
               </svg>
               <p className="ml-2 text-zinc-900 uppercase tracking-wider text-sm font-medium">
-                Back To Collections
+                {backLinkInfo.text}
               </p>
             </span>
           </Link>
