@@ -21,7 +21,6 @@ async function getData(slug: string): Promise<fullProduct> {
   }`;
 
   const data = await client.fetch(query);
-
   return data;
 }
 
