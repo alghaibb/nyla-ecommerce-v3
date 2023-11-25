@@ -285,7 +285,50 @@
   transition: background-color 0.5s ease, color 0.5s ease; /* Slower and smoother transition for background-color and color */
 }
 
+/* Styling for View All Button */
+.view-all-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+  padding: 0.8rem 1.5rem;
+  text-transform: uppercase;
+  border: 1px solid #333;
+  border-radius: 0.75rem;
+  color: #fff;
+  background-color: #333; /* Default background color */
+  position: relative; /* Required for the ::before pseudo-element */
+  overflow: hidden; /* Hide overflow for the fade-out effect */
+  transition: background-color 0.5s ease, color 0.5s ease; /* Add transitions for background-color and color */
+}
+
+.view-all-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: background 0.8s ease; /* Smooth transition for background */
+  z-index: -1; /* Place it behind the button content */
+}
+
+/* Button Hover Effect */
+.view-all-btn:hover {
+  color: #131313; /* Darker zinc color for text on hover */
+  background-color: white;
+  transition: background-color 0.5s ease, color 0.5s ease; /* Slower and smoother transition for background-color and color */
+}
+
 /* Responsive Design: Button Sizing */
+
+/* Button Styles for iPads/Tablets */
+@media (max-width: 768px) {
+  .button {
+    max-width: 300px;
+  }
+}
+
 /* Button Styles for Smaller Mobile Devices */
 @media (max-width: 540px) {
   .button {
@@ -306,7 +349,7 @@
 @media (max-width: 375px) {
   .button {
     max-width: 190px;
-    font-size: 0.7rem;
+    font-size: 0.9rem;
     margin: auto;
   }
 }
@@ -319,7 +362,39 @@
   }
 }
 
-/* ... (same media queries for quantity-selector) */
+/* Checkout button for mobile devices */
+@media (max-width: 540px) {
+  .checkout-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 425px) {
+  .checkout-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 375px) {
+  .checkout-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 325px) {
+  .checkout-btn {
+    width: 100%;
+  }
+}
+
+/* Media query for medium to large devices */
+@media (min-width: 768px) {
+  .checkout-btn {
+    width: 100%;
+  }
+}
+
+/* same media queries for quantity-selector */
 @media (max-width: 540px) {
   .quantity-selector {
     justify-content: center;
@@ -407,7 +482,7 @@
   }
 }
 
-/* ... (same media queries for mobile-view and mobile-remove-btn) */
+/* same media queries for mobile-view and mobile-remove-btn */
 @media (max-width: 375px) {
   .mobile-view {
     flex-direction: column;

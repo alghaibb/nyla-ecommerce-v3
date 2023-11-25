@@ -1,5 +1,6 @@
 "use client";
 
+import "../globals.css";
 import React, { useEffect, useState } from "react";
 import {
   Sheet,
@@ -10,7 +11,6 @@ import {
 import { useShoppingCart } from "use-shopping-cart";
 import Image from "next/image";
 import QuantitySelector from "./QuantitySelector";
-import "../globals.css";
 import Spinner from "./LoadingSpinner";
 
 // Define the type for loading states
@@ -72,7 +72,7 @@ const ShoppingCartModal = () => {
 
   return (
     <Sheet open={shouldDisplayCart} onOpenChange={() => handleCartClick()}>
-      <SheetContent className="bg-zinc-100 w-full md:w-[80vw]">
+      <SheetContent className="bg-zinc-100 w-full">
         <SheetHeader>
           <SheetTitle className="font-bold tracking-wider uppercase">
             Your Cart
@@ -147,13 +147,29 @@ const ShoppingCartModal = () => {
               ))}
             </ul>
           </div>
-          <div className="flex justify-between px-4 py-2">
-            <p className="text-lg font-bold tracking-wider uppercase md:text-xl">
-              Total:
-            </p>
-            <p className="text-lg font-bold tracking-wider md:text-xl">
-              ${lastKnownTotal?.toFixed()}
-            </p>
+          <div className="px-4 py-6 border-t border-zinc-400/60 sm:px-6">
+            <div className="flex justify-between text-base font-semibold text-zinc-900">
+              <p className="tracking-wider uppercase">Total:</p>
+              <p>${lastKnownTotal?.toFixed()}</p>
+            </div>
+
+            <div className="mt-6">
+              <button className="tracking-wider button checkout-btn">
+                Checkout
+              </button>
+            </div>
+
+            <div className="flex justify-center mt-6 text-sm text-center text-zinc-500">
+              <p className="flex flex-col">
+                OR
+                <button
+                  className="mt-6 font-medium tracking-wider uppercase duration-150 ease-in-out text-zinc-900 hover:text-zinc-900/80"
+                  onClick={() => handleCartClick()}
+                >
+                  Continue Shopping
+                </button>
+              </p>
+            </div>
           </div>
         </div>
       </SheetContent>
