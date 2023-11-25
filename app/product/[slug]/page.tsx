@@ -4,6 +4,7 @@ import AddToCart from "@/app/components/AddToCart";
 import AddToWishlist from "@/app/components/AddToWishlist";
 import ImageGallery from "@/app/components/ImageGallery";
 import QuantitySelector from "@/app/components/QuantitySelector";
+import Link from "next/link";
 import { fullProduct } from "@/app/interface";
 import { client } from "@/app/lib/client";
 import React, { useEffect, useState } from "react";
@@ -49,6 +50,33 @@ const ProductPage: React.FC<ProductPageProps> = ({ params }) => {
   return (
     <div>
       <div className="max-w-screen-xl px-4 mx-auto mt-10 md:px-8">
+        {/* Back Arrow */}
+        <div className="mx-2 my-4 md:hidden">
+          <Link href="/collections/all">
+            <span className="inline-flex items-center cursor-pointer">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="w-6 h-6"
+              >
+                <path d="M6 8L2 12L6 16" />
+                <path d="M2 12H22" />
+              </svg>
+              <p className="ml-2 text-zinc-900 uppercase tracking-wider text-sm font-medium">
+                Back To Collections
+              </p>
+            </span>
+          </Link>
+        </div>
+
+        {/* Product Images */}
         <div className="grid gap-8 md:grid-cols-2">
           <ImageGallery images={data.image} />
 
