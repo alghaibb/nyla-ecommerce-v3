@@ -37,7 +37,7 @@ const AllProductsPage = () => {
     <div className="bg-zinc-100 font-custom">
       <div className="max-w-2xl px-4 py-16 mx-auto sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
         <h2 className="mb-6 text-2xl font-semibold tracking-wider text-center uppercase text-zinc-900">
-          all products
+          All Collections
         </h2>
         <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
           {data.map((product) => (
