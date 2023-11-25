@@ -33,7 +33,7 @@ const QuantitySelector: React.FC<QuantitySelectorProps> = ({
 
   return (
     <div className="flex w-full md:w-auto">
-      <div className="flex items-center px-4 py-1">
+      <div className="flex items-center px-4 py-1 quantity-selector">
         <button
           onClick={handleDecrease}
           className={`px-2 py-1 font-bold ${

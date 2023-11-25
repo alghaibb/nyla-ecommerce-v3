@@ -9,8 +9,6 @@ import React, { useEffect, useState } from "react";
 import { urlFor } from "../lib/client";
 import { WishlistProduct } from "../components/AddToWishlist";
 
-// Assuming you have the same interfaces defined as before...
-
 const WishlistPage = () => {
   const [wishlistItems, setWishlistItems] = useState<WishlistProduct[]>([]);
   const [isLoading, setIsLoading] = useState(true);

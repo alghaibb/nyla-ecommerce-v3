@@ -144,7 +144,6 @@ const Navbar = () => {
           <span></span>
           <span></span>
         </button>
-
         {/* Hamburger Menu for Mobile */}
         <div
           className={`fixed inset-0 z-40 bg-white shadow-xl ${
@@ -173,6 +172,23 @@ const Navbar = () => {
                 </li>
               ))}
           </ul>
+
+          <div className="absolute left-0 bottom-14">
+            {/* Wishlist Text Link for small screens */}
+            {session && (
+              <div className="p-4">
+                <Link href="/my-wishlist">
+                  <span
+                    className="text-xs font-medium tracking-wider uppercase text-zinc-500"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Wishlist ({wishlistCount} item
+                    {wishlistCount !== 1 ? "s" : ""})
+                  </span>
+                </Link>
+              </div>
+            )}
+          </div>
 
           <div className="absolute bottom-0 w-full p-4 border-t border-zinc-400/60">
             {/* Container for icons */}
@@ -216,7 +232,6 @@ const Navbar = () => {
             </div>
           </div>
         </div>
-
         {/* Overlay when mobile menu is open or when it is closing */}
         {isOverlayVisible && (
           <div
@@ -234,17 +249,15 @@ const Navbar = () => {
             onClick={handleCloseMenu}
           ></div>
         )}
-
         {/* Logo/Shop Name */}
         <Link
           href="/"
-          className="text-2xl font-bold tracking-widest text-gray-800 group sm:text-3xl md:text-3xl lg:text-3xl xl:text-3xl 2xl:text-3xl"
+          className="text-2xl font-bold tracking-widest text-gray-800 group sm:text-3xl md:text-3xl lg:text-3xl xl:text-3xl 2xl:text-3xl md:px-6"
         >
           <span className="inline-flex items-center justify-center uppercase">
             Nyla
           </span>
         </Link>
-
         {/* Desktop Navigation */}
         <div
           className={`hidden md:flex items-center gap-5 text-md font-semibold tracking-widest uppercase ${
@@ -261,22 +274,26 @@ const Navbar = () => {
             </Link>
           ))}
         </div>
-
         {/* Icons Container */}
-        <div className="flex items-center gap-x-5">
+        <div className="flex items-center gap-x-4">
           {/* Wishlist Icon/Button */}
           {session && (
-            <Link href="/my-wishlist">
-              <button
-                onClick={toggleWishlistModal}
-                className="relative duration-300 hover:text-zinc-900 group"
+            <div className="items-center justify-center hidden md:flex">
+              <Link
+                href="/my-wishlist"
+                className="flex items-center justify-center"
               >
-                <Heart className="w-6 h-6" />
-                <span className="absolute top-0 flex items-center justify-center w-4 h-4 text-xs font-semibold rounded-full -left-1 bg-zinc-800 text-zinc-200 group-hover:bg-black">
-                  {wishlistCount}
-                </span>
-              </button>
-            </Link>
+                <button
+                  onClick={toggleWishlistModal}
+                  className="relative duration-300 hover:text-zinc-900 group"
+                >
+                  <Heart className="w-6 h-6 " />
+                  <span className="absolute top-0 flex items-center justify-center w-4 h-4 text-xs font-semibold rounded-full -left-1 bg-zinc-800 text-zinc-200 group-hover:bg-black">
+                    {wishlistCount}
+                  </span>
+                </button>
+              </Link>
+            </div>
           )}
 
           {/* Cart Icon */}
@@ -304,7 +321,7 @@ const Navbar = () => {
           {session && (
             <button
               onClick={handleSignOut}
-              className="relative duration-300 hover:text-zinc-900 group"
+              className="relative hidden duration-300 hover:text-zinc-900 group md:flex md:mr-6"
             >
               <LogOut className="w-6 h-6" />
             </button>

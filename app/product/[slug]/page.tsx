@@ -7,6 +7,7 @@ import QuantitySelector from "@/app/components/QuantitySelector";
 import { fullProduct } from "@/app/interface";
 import { client } from "@/app/lib/client";
 import React, { useEffect, useState } from "react";
+import "../../globals.css";
 
 async function getData(slug: string): Promise<fullProduct> {
   const query = `*[_type == "product" && slug.current == "${slug}"][0] {
@@ -46,8 +47,6 @@ const ProductPage: React.FC<ProductPageProps> = ({ params }) => {
     return null;
   }
 
-  const handleAddToWishlist = () => {};
-
   return (
     <div>
       <div className="max-w-screen-xl px-4 mx-auto mt-10 md:px-8">
@@ -71,7 +70,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ params }) => {
             </div>
 
             {/* All Buttons Container */}
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 py-4 md:py-0">
               {/* Quantity Selector */}
               <QuantitySelector
                 initialQuantity={quantity}
@@ -79,7 +78,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ params }) => {
               />
 
               {/* Add to Cart & Add to Wishlist Button Container */}
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-4 mt-8 md:mt-0">
                 {/* Add to Cart Button */}
                 <AddToCart
                   slug={data.slug}
@@ -100,10 +99,11 @@ const ProductPage: React.FC<ProductPageProps> = ({ params }) => {
                   price={data.price}
                   key={data._id}
                   slug={data.slug}
+                  quantity={data.quantity}
                 />
               </div>
 
-              <p className="mt-6 text-base tracking-wide text-zinc-900">
+              <p className="px-4 py-4 mt-6 text-base tracking-wide text-zinc-900 md:py-0 md:px-0">
                 {data.details}
               </p>
             </div>
