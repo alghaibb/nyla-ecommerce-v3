@@ -5,7 +5,7 @@ export interface simplifiedProduct {
   slug: string;
   categoryName: string;
   name: string;
-  quantity: number
+  quantity: number;
 }
 
 export interface fullProduct {
@@ -16,4 +16,5 @@ export interface fullProduct {
   categoryName: string;
   name: string;
   details: string;
+  quantity: number;
 }

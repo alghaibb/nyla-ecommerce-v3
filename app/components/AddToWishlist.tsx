@@ -20,6 +20,7 @@ const AddToWishlist = ({
   image,
   description,
   price,
+  quantity,
 }: WishlistProduct) => {
   const { toast } = useToast();
 
@@ -33,7 +34,14 @@ const AddToWishlist = ({
     );
 
     if (!itemExists) {
-      wishlist.push({ name, slug, image: imageUrl, description, price });
+      wishlist.push({
+        name,
+        slug,
+        image: imageUrl,
+        description,
+        price,
+        quantity,
+      });
       localStorage.setItem("wishlist", JSON.stringify(wishlist));
       toast({
         title: `${name}`,
