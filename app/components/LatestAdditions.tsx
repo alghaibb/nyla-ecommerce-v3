@@ -34,13 +34,15 @@ const LatestAdditions = async () => {
             {data.map((product) => (
               <div key={product._id} className="relative group">
                 <div className="w-full overflow-hidden rounded-md aspect-square bg-zinc-200 group-hover:opacity-75 lg:h-80">
-                  <Image
-                    src={product.imageUrl}
-                    alt="Product image"
-                    className="object-cover object-center w-full h-full lg:w-full lg:h-full"
-                    width={300}
-                    height={300}
-                  />
+                  <Link href={`/product/${product.slug}`}>
+                    <Image
+                      src={product.imageUrl}
+                      alt="Product image"
+                      className="object-cover object-center w-full h-full cursor-pointer lg:w-full lg:h-full"
+                      width={300}
+                      height={300}
+                    />
+                  </Link>
                 </div>
 
                 <div className="flex justify-center mt-4">
