@@ -66,7 +66,7 @@ const WishlistPage = () => {
         <p className="mt-2 text-zinc-500">
           Looks like you haven&apos;t found something you like yet.
         </p>
-        <Link href="/products/all">
+        <Link href="/collections/all">
           <button className="mt-6 button" aria-label="Explore Our Collection">
             Explore Our Collection
           </button>
@@ -103,7 +103,7 @@ const WishlistPage = () => {
             </div>
 
             {/* Quantity Selector */}
-            <div className="flex items-end justify-center mt-6 bg-transparent md:mt-0 md:col-span-1">
+            <div className="flex items-center justify-center mt-6 bg-transparent md:mt-0 md:col-span-1">
               <QuantitySelector
                 initialQuantity={item.quantity}
                 onQuantityChange={(newQuantity) =>

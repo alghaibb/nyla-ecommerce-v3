@@ -56,7 +56,7 @@ const ShoppingCartModal = () => {
   if (!cartCount) {
     return (
       <Sheet open={shouldDisplayCart} onOpenChange={handleCartClick}>
-        <SheetContent className="bg-zinc-200 w-full md:w-[80vw] text-zinc-900">
+        <SheetContent className="bg-zinc-200 text-zinc-900 custom-sheet-content">
           <SheetHeader className="font-bold tracking-wider uppercase">
             Your Cart
           </SheetHeader>
@@ -72,7 +72,7 @@ const ShoppingCartModal = () => {
 
   return (
     <Sheet open={shouldDisplayCart} onOpenChange={() => handleCartClick()}>
-      <SheetContent className="bg-zinc-100 w-full">
+      <SheetContent className="w-full bg-zinc-100 custom-sheet-content">
         <SheetHeader>
           <SheetTitle className="font-bold tracking-wider uppercase">
             Your Cart
@@ -154,7 +154,7 @@ const ShoppingCartModal = () => {
             </div>
 
             <div className="mt-6">
-              <button className="tracking-wider button checkout-btn">
+              <button className="mx-auto tracking-wider button checkout-btn">
                 Checkout
               </button>
             </div>
