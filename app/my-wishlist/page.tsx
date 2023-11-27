@@ -60,15 +60,34 @@ const WishlistPage = () => {
   if (wishlistItems.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center h-screen">
-        <h3 className="text-2xl italic font-medium text-zinc-600">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="#adb5bd"
+          strokeWidth="2"
+          className="w-16 h-16 my-2 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 xl:w-32 xl:h-32 2xl:w-36 2xl:h-36"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M3 3h2l3.6 8.814a1 1 0 0 0 .894.606h9.764a1 1 0 0 0 .894-1.447L17.44 3H3zm0 0v18h18V3H3z"
+          />
+        </svg>
+
+        <h3 className="text-xl italic font-medium md:text-2xl text-zinc-600">
           Your wishlist is empty
         </h3>
-        <p className="mt-2 text-zinc-500">
-          Looks like you haven&apos;t found something you like yet.
+
+        <p className="mt-2 text-sm tracking-tighter text-zinc-500 md:text-base lg:text-lg">
+          Looks like you haven&apos;t found something you like yet
         </p>
         <Link href="/collections/all">
-          <button className="mt-6 button" aria-label="Explore Our Collection">
-            Explore Our Collection
+          <button
+            className="button wishlist-empty-btn md:mt-4"
+            aria-label="Explore Our Collection"
+          >
+            View Our Collections
           </button>
         </Link>
       </div>

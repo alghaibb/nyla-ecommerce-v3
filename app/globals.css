@@ -331,54 +331,81 @@
 
 @media (min-width: 1024px) {
   .button {
-    max-width: 220px; /* Adjust as needed */
+    max-width: 250px; /* Adjust as needed */
   }
 }
 
 @media (min-width: 1280px) {
   .button {
-    max-width: 220px; /* Adjust as needed */
+    max-width: 250px; /* Adjust as needed */
   }
 }
 
 @media (min-width: 1440px) {
   .button {
-    max-width: 220px; /* Adjust as needed */
+    max-width: 250px; /* Adjust as needed */
   }
 }
 
 @media (min-width: 1920px) {
   .button {
-    max-width: 220px; /* Adjust as needed */
+    max-width: 250px; /* Adjust as needed */
   }
 }
 
 /* Button Styles for Smaller Mobile Devices */
 @media (max-width: 540px) {
   .button {
-    max-width: 230px;
+    max-width: 250px;
     margin: auto;
   }
 }
 
 @media (max-width: 425px) {
   .button {
-    max-width: 210px;
+    max-width: 250px;
     margin: auto;
   }
 }
 
 @media (max-width: 375px) {
   .button {
-    max-width: 190px;
+    max-width: 250px;
     margin: auto;
   }
 }
 
 @media (max-width: 320px) {
   .button {
-    max-width: 170px;
+    max-width: 250px;
     margin: auto;
+    font-size: 0.8rem;
+  }
+}
+
+/* Wishlist empty page/button responsiveness */
+
+@media (max-width: 540px) {
+  .wishlist-empty-btn {
+    margin-top: 1.2rem;
+  }
+}
+
+@media (max-width: 425px) {
+  .wishlist-empty-btn {
+    margin-top: 1.2rem;
+  }
+}
+
+@media (max-width: 375px) {
+  .wishlist-empty-btn {
+    margin-top: 1.2rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .wishlist-empty-btn {
+    margin-top: 1.2rem;
   }
 }
 

@@ -54,15 +54,6 @@ const ShoppingCartModal = () => {
     }
   }, [isLoading, totalPrice]);
 
-  const handleCheckout = async () => {
-    const itemCount = cartCount || 0; // Default to 0 if cartCount is undefined
-    if (itemCount > 0) {
-      redirectToCheckout();
-    } else {
-      alert("Your cart is empty.");
-    }
-  };
-
   if (!cartCount) {
     return (
       <Sheet open={shouldDisplayCart} onOpenChange={handleCartClick}>
@@ -164,10 +155,7 @@ const ShoppingCartModal = () => {
             </div>
 
             <div className="mt-6">
-              <button
-                className="mx-auto tracking-wider button checkout-btn"
-                onClick={handleCheckout}
-              >
+              <button className="mx-auto tracking-wider button checkout-btn">
                 Checkout
               </button>
             </div>
