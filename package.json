@@ -40,7 +40,7 @@
     "react-slick": "^0.29.0",
     "redux-persist": "^6.0.0",
     "slick-carousel": "^1.8.1",
-    "stripe": "^14.4.0",
+    "stripe": "^14.5.0",
     "swiper": "^11.0.4",
     "tailwind-merge": "^2.0.0",
     "tailwind-scrollbar-hide": "^1.1.7",
