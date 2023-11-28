@@ -144,7 +144,7 @@ const SignUpForm = () => {
                 )}
               />
             </div>
-            <button className="w-full mt-5 button" type="submit">
+            <button className="w-full button sign-up-btn" type="submit">
               Sign up
             </button>
             <p className="mt-5 text-sm text-center text-zinc-600">

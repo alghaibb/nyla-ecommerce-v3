@@ -18,7 +18,8 @@ async function getData(slug: string): Promise<fullProduct> {
       name,
       details,
       "slug": slug.current,
-      "categoryName": category->name
+      "categoryName": category->name,
+      price_id
   }`;
 
   const data = await client.fetch(query);
@@ -86,7 +87,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ params }) => {
                 <path d="M6 8L2 12L6 16" />
                 <path d="M2 12H22" />
               </svg>
-              <p className="ml-2 text-zinc-900 uppercase tracking-wider text-sm font-medium">
+              <p className="ml-2 text-sm font-medium tracking-wider uppercase text-zinc-900">
                 {backLinkInfo.text}
               </p>
             </span>
@@ -125,7 +126,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ params }) => {
               <div className="flex flex-col gap-4 mt-8 md:mt-0">
                 {/* Add to Cart Button */}
                 <AddToCart
-                  slug={data.slug}
+                  price_id={data.price_id}
                   currency="AUD"
                   description={data.details}
                   image={data.image[0]}

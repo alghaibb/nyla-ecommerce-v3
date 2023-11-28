@@ -12,6 +12,7 @@ import { useShoppingCart } from "use-shopping-cart";
 import Image from "next/image";
 import QuantitySelector from "./QuantitySelector";
 import Spinner from "./LoadingSpinner";
+import { error } from "console";
 
 // Define the type for loading states
 type LoadingStates = {
@@ -29,6 +30,33 @@ const ShoppingCartModal = () => {
     setItemQuantity,
     redirectToCheckout,
   } = useShoppingCart();
+
+  async function handleCheckoutClick(event: any) {
+    event.preventDefault();
+
+    try {
+      const result = await redirectToCheckout();
+
+      if (result?.error) {
+        // Handle specific error cases
+        if (result.error.type === "stripe_redirect_failed") {
+          console.log("Stripe redirect failed. Please try again later.");
+          // You can display a message to the user or retry the checkout
+        } else if (result.error.type === "cart_empty") {
+          console.log(
+            "Your cart is empty. Add items to your cart before checkout."
+          );
+          // You can direct the user to add items to their cart
+        } else {
+          console.log("An unknown error occurred during checkout.");
+          // Handle other unknown errors
+        }
+      }
+    } catch (error) {
+      console.error("An unexpected error occurred during checkout:", error);
+      // Handle unexpected errors, possibly show an error message to the user
+    }
+  }
 
   const [loadingStates, setLoadingStates] = useState<LoadingStates>({});
 
@@ -56,7 +84,7 @@ const ShoppingCartModal = () => {
 
   if (!cartCount) {
     return (
-      <Sheet open={shouldDisplayCart} onOpenChange={handleCartClick}>
+      <Sheet open={shouldDisplayCart} onOpenChange={() => handleCartClick()}>
         <SheetContent className="bg-zinc-200 text-zinc-900 custom-sheet-content">
           <SheetHeader className="font-bold tracking-wider uppercase">
             Your Cart
@@ -155,7 +183,10 @@ const ShoppingCartModal = () => {
             </div>
 
             <div className="mt-6">
-              <button className="mx-auto tracking-wider button checkout-btn">
+              <button
+                className="mx-auto tracking-wider button checkout-btn"
+                onClick={handleCheckoutClick}
+              >
                 Checkout
               </button>
             </div>

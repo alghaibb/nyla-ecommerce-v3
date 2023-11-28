@@ -11,7 +11,7 @@ export interface ProductCart {
   currency: string;
   image: any;
   quantity: number;
-  slug: string;
+  price_id: string;
 }
 
 const AddToCart = ({
@@ -21,7 +21,7 @@ const AddToCart = ({
   currency,
   image,
   quantity,
-  slug,
+  price_id,
 }: ProductCart) => {
   const { addItem, handleCartClick, cartDetails, setItemQuantity } =
     useShoppingCart();
@@ -33,16 +33,16 @@ const AddToCart = ({
       price,
       currency,
       image: urlFor(image).url(),
-      id: slug,
+      price_id,
       quantity,
     };
 
     // Check if the item is already in the cart
-    if (cartDetails && cartDetails[slug]) {
+    if (cartDetails && cartDetails[price_id]) {
       // Update the quantity of the existing item
       setItemQuantity(
-        slug,
-        cartDetails && cartDetails[slug].quantity + quantity
+        price_id,
+        cartDetails && cartDetails[price_id].quantity + quantity
       );
     } else {
       // Add the new item to the cart
