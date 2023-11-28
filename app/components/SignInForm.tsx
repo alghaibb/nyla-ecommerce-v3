@@ -91,7 +91,7 @@ const SignInForm = () => {
                 )}
               />
             </div>
-            <button className="w-full mt-6 button" type="submit">
+            <button className="w-full mx-auto button sign-in-btn" type="submit">
               Sign in
             </button>
           </form>

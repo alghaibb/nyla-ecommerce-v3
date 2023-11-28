@@ -17,4 +17,5 @@ export interface fullProduct {
   name: string;
   details: string;
   quantity: number;
+  price_id: string;
 }

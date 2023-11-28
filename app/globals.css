@@ -443,13 +443,26 @@
 
 @media (min-width: 1280px) {
   .checkout-btn {
-    width: 50%; /* 50% of container width for very large screens */
+    width: 80%; /* 50% of container width for very large screens */
   }
 }
 
 @media (min-width: 1440px) {
   .checkout-btn {
-    width: 40%; /* 40% of container width for widescreens */
+    width: 70%; /* 40% of container width for widescreens */
+  }
+}
+
+/* Sign In/Sign Up button responsiveness */
+@media (min-width: 375px) {
+  .sign-in-btn {
+    margin-top: 1.5rem;
+  }
+}
+
+@media (min-width: 375px) {
+  .sign-up-btn {
+    margin-top: 1.5rem;
   }
 }
 
