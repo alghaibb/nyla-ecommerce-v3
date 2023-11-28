@@ -8,6 +8,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Provider from "./components/SessionProvider";
 import { Toaster } from "@/components/ui/toaster";
+import Footer from "./components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,6 +31,7 @@ export default function RootLayout({
             <Navbar />
             <ShoppingCartModal />
             {children}
+            <Footer />
           </CartProvider>
         </Provider>
       </body>
