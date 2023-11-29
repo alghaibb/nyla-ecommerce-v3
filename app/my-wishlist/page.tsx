@@ -95,7 +95,7 @@ const WishlistPage = () => {
   }
 
   return (
-    <div className="container p-4">
+    <div className="container h-screen p-4">
       <h1 className="px-3 py-3 my-6 text-3xl font-bold border-b-2 border-zinc-800">
         My Wishlist
       </h1>
