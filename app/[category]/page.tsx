@@ -22,10 +22,10 @@ async function getData(category: string) {
 const CategoryPage = async ({ params }: { params: { category: string } }) => {
   const data: simplifiedProduct[] = await getData(params.category);
   return (
-    <div className="bg-zinc-100 font-custom">
+    <div className="h-screen bg-zinc-100 font-custom">
       <div className="max-w-2xl px-4 mx-auto sm:px-6 lg:max-w-7xl lg:px-8">
         <div className="flex flex-col items-center justify-center">
-          <h2 className="mb-2 mt-6 text-2xl font-semibold tracking-wider text-center uppercase text-zinc-900">
+          <h2 className="mt-6 mb-2 text-2xl font-semibold tracking-wider text-center uppercase text-zinc-900">
             Products for {params.category}
           </h2>
           <div className="grid grid-cols-1 mt-6 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">

@@ -1,79 +1,47 @@
 import React from "react";
+import Container from "./Container";
+import FooterList from "./FooterList";
+import Link from "next/link";
+import { Instagram, Music2 } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="py-8 bg-zinc-800 text-zinc-100">
-      <div className="container px-4 mx-auto">
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-          <div className="mb-6 md:mb-0">
-            <h2 className="mb-4 text-xl font-semibold">Company</h2>
-            <ul>
-              <li className="mb-2">
-                <a href="#" className="hover:text-zinc-400">
-                  About Us
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-zinc-400">
-                  Contact Us
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div className="mb-6 md:mb-0">
-            <h2 className="mb-4 text-xl font-semibold">Support</h2>
-            <ul>
-              <li className="mb-2">
-                <a href="#" className="hover:text-zinc-400">
-                  FAQ
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-zinc-400">
-                  Shipping & Returns
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-zinc-400">
-                  Privacy Policy
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div className="mb-6 md:mb-0">
-            <h2 className="mb-4 text-xl font-semibold">Follow Us</h2>
-            <ul>
-              <li className="mb-2">
-                <a href="#" className="hover:text-zinc-400">
-                  Tiktok
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-zinc-400">
-                  Instagram
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div className="mb-6 md:mb-0">
-            <h2 className="mb-4 text-xl font-semibold">Newsletter</h2>
-            <p className="mb-4">
-              Subscribe to our newsletter and get the latest updates and
-              promotions.
+    <footer className="mt-16 text-sm bg-zinc-800 text-zinc-200">
+      <Container>
+        <div className="flex flex-col justify-between pt-16 pb-8 md:flex-row">
+          <FooterList>
+            <h3 className="mb-2 text-base font-bold">Customer Service</h3>
+            <Link href="/">Contact Us</Link>
+            <Link href="/">Shipping Policy</Link>
+            <Link href="/">Returns & Exchanges</Link>
+            <Link href="/">FAQs</Link>
+          </FooterList>
+          <div className="w-full mb-6 md:w-1/3 md:mb-0">
+            <h3 className="mb-2 text-base font-bold">About Us</h3>
+            <p className="mb-2">
+              At Nyla, we embrace the elegance of modesty through our exclusive
+              range of hijabs and abayas. Our mission is to blend traditional
+              values with modern fashion, offering attire that symbolizes grace
+              and sophistication. Each piece reflects our dedication to quality,
+              comfort, and style, empowering women to express their identity
+              with confidence. Join us in the celebration of modest fashion
+              redefined.
             </p>
-            <div className="flex flex-col md:flex-row">
-              <input
-                type="email"
-                placeholder="Your Email"
-                className="px-3 py-2 mb-4 rounded-md bg-zinc-100 text-zinc-600 focus:outline-none md:mb-0 md:rounded-r-none md:rounded-l-md"
-              />
-              <button className="px-4 py-2 rounded-md bg-zinc-500 text-zinc-100 hover:bg-zinc-400 focus:outline-none md:rounded-l-none md:rounded-r-md">
-                Subscribe
-              </button>
-            </div>
+            <p>&copy; {new Date().getFullYear()} Nyla. All rights reserved.</p>
           </div>
+          <FooterList>
+            <h3 className="mb-2 text-base font-bold">Follow Us</h3>
+            <div className="flex gap-4">
+              <Link href="/" target="_blank">
+                <Instagram />
+              </Link>
+              <Link href="/" target="_blank">
+                <Music2 />
+              </Link>
+            </div>
+          </FooterList>
         </div>
-      </div>
+      </Container>
     </footer>
   );
 };
