@@ -3,6 +3,7 @@ import { client } from "../lib/client";
 import { simplifiedProduct } from "../interface";
 import Image from "next/image";
 import Link from "next/link";
+import Footer from "../components/Footer";
 
 async function getData(category: string) {
   const query = `*[_type == "product" && category->name == "${category}"] {
@@ -22,7 +23,7 @@ async function getData(category: string) {
 const CategoryPage = async ({ params }: { params: { category: string } }) => {
   const data: simplifiedProduct[] = await getData(params.category);
   return (
-    <div className="h-screen bg-zinc-100 font-custom">
+    <div className="bg-zinc-100 font-custom">
       <div className="max-w-2xl px-4 mx-auto sm:px-6 lg:max-w-7xl lg:px-8">
         <div className="flex flex-col items-center justify-center">
           <h2 className="mt-6 mb-2 text-2xl font-semibold tracking-wider text-center uppercase text-zinc-900">

@@ -67,7 +67,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ params }) => {
 
   return (
     <div>
-      <div className="h-screen max-w-screen-xl px-4 mx-auto mt-10 md:px-8">
+      <div className="max-w-screen-xl px-4 mx-auto mt-10 md:px-8">
         {/* Back Arrow */}
         <div className="mx-2 my-4 md:hidden">
           <Link href={backLinkInfo.link}>
