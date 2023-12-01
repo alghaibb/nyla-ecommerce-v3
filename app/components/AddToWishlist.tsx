@@ -4,6 +4,7 @@ import "../globals.css";
 import React from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { urlFor } from "../lib/client";
+import { useSession } from "next-auth/react";
 
 export interface WishlistProduct {
   quantity: number;
@@ -22,9 +23,21 @@ const AddToWishlist = ({
   price,
   quantity,
 }: WishlistProduct) => {
+  const { data: session } = useSession();
   const { toast } = useToast();
+  const isAuthenticated = !!session;
 
   const handleAddToWishlist = () => {
+    if (!isAuthenticated) {
+      toast({
+        title: "Authentication Required",
+        description: "You must be logged in to add items to your wishlist.",
+        variant: "default",
+        className: "bg-zinc-800 text-zinc-100",
+      });
+      return;
+    }
+
     const wishlist = JSON.parse(localStorage.getItem("wishlist") || "[]");
 
     const imageUrl = urlFor(image).url();

@@ -26,6 +26,7 @@ const ImageGallery = ({ images }: iAppProps) => {
             }`}
           >
             <Image
+              priority
               src={urlFor(image).url()}
               width={200}
               height={200}

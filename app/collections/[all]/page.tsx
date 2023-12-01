@@ -45,6 +45,7 @@ const AllProductsPage = () => {
               <div className="w-full overflow-hidden rounded-md aspect-square bg-zinc-200 group-hover:opacity-75 lg:h-80">
                 <Link href={`/product/${product.slug}`}>
                   <Image
+                    priority
                     src={product.imageUrl}
                     alt="Product image"
                     layout="responsive"
